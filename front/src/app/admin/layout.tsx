@@ -29,12 +29,12 @@ export default function AdminLayout({children}: {children: React.ReactNode}) {
             return
         }
 
-        if(user.role === "Boss") {
-            router.replace("/admin/users")
-            return
-        } else if (user.role === "Editor") {
-            router.replace("/admin/products")
-        }
+        // if(user.role === "Boss") {
+        //     router.push("/admin/users")
+        //     return
+        // } else if (user.role === "Editor") {
+        //     router.replace("/admin/products")
+        // }
     }, [user, router, loading])
     return <>{children}</>
 }
