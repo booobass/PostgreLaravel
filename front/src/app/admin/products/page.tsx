@@ -1,9 +1,122 @@
 "use client"
 
+import api from "@/lib/axios"
+import { useCallback, useState } from "react"
+import { useDropzone } from "react-dropzone"
+
 const AdminProducts = () => {
+
+    const [product, setProduct] = useState({
+        name: "",
+        price: "",
+        description: "",
+        stock: ""
+    })
+
+    const [image, setImage] = useState<File | null>(null)
+
+    const onDrop = useCallback((acceptedFiles: File[]) => {
+        if(acceptedFiles.length > 0) {
+            setImage(acceptedFiles[0])
+        }
+    }, [])
+
+    const {getRootProps, getInputProps, isDragActive} = useDropzone({
+        onDrop,
+        accept: {
+            'image/*': [".png", ".jpg", ".jpeg", ".gif"]
+        },
+        maxFiles: 1,
+        maxSize: 5 * 1024 * 1024,
+        validator: (file) => {
+            if(file.size > 5 * 1024 * 1024) {
+                return {
+                    code: "file-too-large",
+                    message: "ファイルサイズが大きすぎます"
+                }
+            }
+            return null
+        }
+    })
+
+    const handleChange = (e :React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setProduct({
+            ...product,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        try {
+            const formData = new FormData()
+            formData.append("name", product.name)
+            formData.append("price", product.price)
+            formData.append("description", product.description)
+            formData.append("stock", product.stock)
+            if(image) {
+                formData.append("image", image)
+            }
+
+            console.log(formData)
+
+            await api.post("/api/product/store", 
+                formData,
+                {
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                        "Content-Type": "multipart/form-data"
+                    }
+                }
+            )
+            alert("商品を登録しました")
+        } catch {
+            alert("商品登録に失敗しました")
+        }
+    }
+
     return (
         <div>
-            <h4>商品管理</h4>
+            <h4>商品登録</h4>
+            <form onSubmit={handleSubmit}>
+                <label>商品名：
+                    <input
+                        type="text"
+                        name="name"
+                        value={product.name}
+                        onChange={handleChange} />
+                </label>
+                <label>値段：
+                    <input
+                        type="text"
+                        name="price"
+                        value={product.price}
+                        onChange={handleChange} />
+                </label>
+                <label>
+                    <div {...getRootProps()}>
+                        <input {...getInputProps()} />
+                        {isDragActive}
+                        <p>ここに画像をドロップして下さい</p>
+                    </div>
+                    {image && <p>選択した画像：{image.name}</p>}
+                </label>
+                <label>商品説明：
+                    <textarea
+                        name="description"
+                        value={product.description}
+                        onChange={handleChange}
+                        rows={5} ></textarea>
+                </label>
+                <label>在庫数：
+                    <input
+                        type="text"
+                        name="stock"
+                        value={product.stock}
+                        onChange={handleChange} />
+                </label>
+                <button>登録</button>
+            </form>
         </div>
     )
 }
