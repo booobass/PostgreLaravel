@@ -1,5 +1,6 @@
 "use client"
 
+import { useAuth } from "@/context/AuthContext"
 import api from "@/lib/axios"
 import { User } from "@/type/type"
 import { useState } from "react"
@@ -17,6 +18,8 @@ const Login = () => {
         })
     }
 
+    const {login} = useAuth()
+
     const handleSubmit = async (e :React.FormEvent) => {
         e.preventDefault()
         try {
@@ -29,7 +32,9 @@ const Login = () => {
             )
             const token = await response.data.token
             localStorage.setItem("token", token)
+            login(response.data.user, response.data.token)
             alert("ログインしました")
+            console.log(response.data)
         } catch {
             alert("ログイン出来ません")
         }
