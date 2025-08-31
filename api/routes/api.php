@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
@@ -27,4 +28,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/product', [ProductController::class, 'index']);
     Route::post('/category/store', [CategoryController::class, 'store']);
     Route::get('/category', [CategoryController::class, 'index']);
+    Route::post('/cart/store', [CartController::class, 'store']);
 });

@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class CategoryController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categorys = Category::all();
-        return response()->json(['categorys' => $categorys]);
+        //
     }
 
     /**
@@ -30,18 +30,24 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'product_id' => 'required|integer',
+            'quantity'   => 'required|integer|min:1',
         ]);
 
-        $category = new Category($validated);
-        $category->save();
-        return response()->json(['category' => $category]);
+        // データ保存
+        $cart = Cart::create([
+            'user_id'    => Auth::id(),
+            'product_id' => $validated['product_id'],
+            'quantity'   => $validated['quantity'],
+        ]);
+
+        return response()->json($cart, 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(Cart $cart)
     {
         //
     }
@@ -49,7 +55,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit(Cart $cart)
     {
         //
     }
@@ -57,7 +63,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Cart $cart)
     {
         //
     }
@@ -65,7 +71,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(Cart $cart)
     {
         //
     }
