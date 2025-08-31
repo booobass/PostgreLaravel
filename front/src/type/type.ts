@@ -19,3 +19,18 @@ export type AuthContextType = {
     login: (user: AdminUser, token: string) => void;
     logout: () => void;
 }
+
+export type Category = {
+    id: number;
+    name: string;
+}
+
+export type Product = {
+    id: number;
+    name: string;
+    description: string;
+    image?: string;
+    price: number;
+    stock: number;
+    categories?: Category[];
+}

@@ -1,6 +1,8 @@
 "use client"
 
+import { ReadCategory } from "@/components/ReadCategory"
 import api from "@/lib/axios"
+import { Category } from "@/type/type"
 import { useCallback, useState } from "react"
 import { useDropzone } from "react-dropzone"
 
@@ -46,6 +48,18 @@ const AdminProducts = () => {
         })
     }
 
+    const [selectedCategories, setSelectedCategories] = useState<number[]>([])
+
+    const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = Number(e.target.value)
+        if(e.target.checked) {
+            setSelectedCategories([...selectedCategories, value])
+        } else {
+            setSelectedCategories(selectedCategories.filter(c => c !== value))
+        }
+    }
+
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         try {
@@ -54,9 +68,14 @@ const AdminProducts = () => {
             formData.append("price", product.price)
             formData.append("description", product.description)
             formData.append("stock", product.stock)
+            
             if(image) {
                 formData.append("image", image)
             }
+
+            selectedCategories.forEach(c => {
+                formData.append("categories[]", String(c))
+            })
 
             console.log(formData)
 
@@ -74,6 +93,9 @@ const AdminProducts = () => {
             alert("商品登録に失敗しました")
         }
     }
+
+    const { categories } = ReadCategory()
+    console.log(categories)
 
     return (
         <div>
@@ -108,6 +130,16 @@ const AdminProducts = () => {
                         onChange={handleChange}
                         rows={5} ></textarea>
                 </label>
+                {categories.map((c :Category) => (
+                    <label key={c.id}>{c.name}
+                        <input
+                            type="checkbox"
+                            name="categories"
+                            value={c.id}
+                            checked={selectedCategories.includes(c.id)}
+                            onChange={handleCategoryChange} />
+                    </label>
+                ))}
                 <label>在庫数：
                     <input
                         type="text"
