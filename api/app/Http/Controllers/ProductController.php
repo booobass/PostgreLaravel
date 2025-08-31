@@ -13,7 +13,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::with('categories')->get();
+        return response()->json(['products' => $products]);
     }
 
     /**
@@ -35,6 +36,8 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
             'stock' => 'required|integer|min:0',
+            'categories' => 'nullable|array',
+            'categories.*' => 'integer|exists:categories,id',
         ]);
 
         if($request->hasFile('image')) {
@@ -44,11 +47,18 @@ class ProductController extends Controller
             $validated['image'] = $name;
         }
 
+        $categories = $validated['categories'] ?? [];
+        unset($validated['categories']);
+
         $product = new Product($validated);
         $product->user_id = Auth::user()->id;
         $product->save();
 
-        return response()->json(['product' => $product]);
+        if(!empty($categories)) {
+            $product->categories()->sync($categories);
+        }
+
+        return response()->json(['product' => $product->load('categories')]);
     }
 
     /**

@@ -13,6 +13,7 @@ class Product extends Model
         'description',
         'image',
         'stock',
+        'categories',
     ];
 
     public function user()
@@ -22,7 +23,7 @@ class Product extends Model
 
     public function categories()
     {
-        return $this->belongsToManyt(Category::class, 'category_product');
+        return $this->belongsToMany(Category::class, 'product_categories');
     }
 
 }
