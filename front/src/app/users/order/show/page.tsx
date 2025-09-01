@@ -1,0 +1,63 @@
+"use client"
+
+import { ReadCart } from "@/components/ReadCart"
+import api from "@/lib/axios"
+import { tax } from "@/lib/tax"
+import React, { useState } from "react"
+
+const ShowOrder = () => {
+    const [payment, setPayment] = useState<"credit" | "cash">("credit")
+
+    const handleOrder = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        try {
+            const response = await api.post("/api/order/store",
+                {
+                    payment: payment,
+                    total: totalPrice
+                },
+                {
+                    headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+                }
+            )
+            alert("注文しました")
+            console.log(response.data.order)
+
+        } catch {
+            alert("注文出来ません")
+        }
+    }
+
+    const { carts} =  ReadCart()
+
+    const totalQuantity = carts.reduce((sum: number, cart: { quantity: number }) => sum + cart.quantity, 0);
+    const subPrice = carts.reduce((sum: number, cart: { product: { price: number }, quantity: number }) => sum + (cart.product.price * cart.quantity), 0);
+    const totalPrice = Math.floor(subPrice * tax)
+
+    return (
+        <div>
+            <h3>注文情報入力</h3>
+            <div>
+                <h3>小計</h3>
+                <div>
+                    <h4>商品：{totalQuantity}個</h4>
+                    <h4>税込：¥{totalPrice}</h4>
+                </div>
+            </div>
+            <form onSubmit={handleOrder}>
+                <label>お支払い方法：
+                    <select
+                        name="payment"
+                        value={payment}
+                        onChange={(e) => setPayment(e.target.value as "credit" | "cash")}>
+                        <option value="credit">クレジット</option>
+                        <option value="cash">現金</option>
+                    </select>
+                </label>
+                <button>注文する</button>
+            </form>
+        </div>
+    )
+}
+
+export default ShowOrder
