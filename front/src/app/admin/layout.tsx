@@ -36,5 +36,9 @@ export default function AdminLayout({children}: {children: React.ReactNode}) {
         //     router.replace("/admin/products")
         // }
     }, [user, router, loading])
-    return <>{children}</>
+    return (
+        <div className="text-xl text-black-500 bg-[#f9fafb]">
+            {children}
+        </div>
+    )
 }

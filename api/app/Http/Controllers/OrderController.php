@@ -2,19 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
+use App\Models\Order;
+use App\Services\OrderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CartController extends Controller
+class OrderController extends Controller
 {
+    protected $orderService;
+
+    public function __construct(OrderService $orderService)
+    {
+        $this->orderService = $orderService;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $carts = Cart::Where('user_id', Auth::id())->with('product')->get();
-        return response()->json(['carts' => $carts]);
+        //
     }
 
     /**
@@ -31,24 +37,19 @@ class CartController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'product_id' => 'required|integer',
-            'quantity'   => 'required|integer|min:1',
+            'payment' => 'required|string',
+            'total' => 'required|integer',
         ]);
 
-        // データ保存
-        $cart = Cart::create([
-            'user_id'    => Auth::id(),
-            'product_id' => $validated['product_id'],
-            'quantity'   => $validated['quantity'],
-        ]);
+        $order = $this->orderService->createOrder(Auth::user(), $validated);
 
-        return response()->json(["cart" => $cart]);
+        response()->json(['order' => $order]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Cart $cart)
+    public function show(Order $order)
     {
         //
     }
@@ -56,7 +57,7 @@ class CartController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Cart $cart)
+    public function edit(Order $order)
     {
         //
     }
@@ -64,7 +65,7 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Cart $cart)
+    public function update(Request $request, Order $order)
     {
         //
     }
@@ -72,7 +73,7 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cart $cart)
+    public function destroy(Order $order)
     {
         //
     }

@@ -34,3 +34,11 @@ export type Product = {
     stock: number;
     categories?: Category[];
 }
+
+export type CartType = {
+    id: number;
+    user_id: number;
+    procuct_id: number;
+    quantity: number;
+    product?: Product;
+}

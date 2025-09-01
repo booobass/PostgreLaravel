@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,4 +30,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/category/store', [CategoryController::class, 'store']);
     Route::get('/category', [CategoryController::class, 'index']);
     Route::post('/cart/store', [CartController::class, 'store']);
+    Route::get('/cart', [CartController::class, 'index']);
+    Route::post('/order/store', [OrderController::class, 'store']);
 });
