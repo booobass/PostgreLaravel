@@ -1,31 +1,15 @@
 "use client"
+import { ReadProduct } from "@/components/ReadProduct"
 import api from "@/lib/axios"
 import { Product } from "@/type/type"
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
  
 
 const Products = () => {
 
-    const [products, setProducts] = useState<Product[]>([])
-
-    const fetchProducts = async () => {
-        try {
-            const response = await api.get("/api/product", {
-                headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
-            })
-            setProducts(response.data.products)
-            console.log(response.data.products)
-
-        } catch {
-            alert("商品取得出来ません")
-        }
-    }
-
-    useEffect(() => {
-        fetchProducts()
-    }, [])
+    const {products} = ReadProduct()
 
     const [quantity, setQuantity] = useState<{[key: number]: string}>({})
 
