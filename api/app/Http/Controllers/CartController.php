@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Services\CartServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,6 +12,13 @@ class CartController extends Controller
     /**
      * Display a listing of the resource.
      */
+    protected $cartService;
+
+    public function __construct(CartServices $cartService)
+    {
+        $this->cartService = $cartService;
+    }
+
     public function index()
     {
         $carts = Cart::Where('user_id', Auth::id())->with('product')->get();
@@ -35,14 +43,13 @@ class CartController extends Controller
             'quantity'   => 'required|integer|min:1',
         ]);
 
-        // データ保存
-        $cart = Cart::create([
-            'user_id'    => Auth::id(),
-            'product_id' => $validated['product_id'],
-            'quantity'   => $validated['quantity'],
-        ]);
+        try {
+            $cart = $this->cartService->createCart(Auth::user(), $validated);
+            return response()->json(['cart' => $cart]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 400);
+        }
 
-        return response()->json(["cart" => $cart]);
     }
 
     /**
