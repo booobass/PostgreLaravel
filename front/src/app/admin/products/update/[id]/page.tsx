@@ -39,6 +39,10 @@ const AdminUpdate = () => {
                 stock: singleProduct.stock,
                 image: singleProduct.image
             })
+
+            if(singleProduct.categories) {
+                setUpdateCategories(singleProduct.categories.map((c: Category) => c.id))
+            }
         }
         getSingleProduct(id as string)
     }, [id])
@@ -48,12 +52,16 @@ const AdminUpdate = () => {
         try {
             const formData = new FormData()
             formData.append("name", products.name)
-            formData.append("peice", products.price)
+            formData.append("price", products.price)
             formData.append("description", products.description)
             formData.append("stock", products.stock)
-            if(products.image) {
+            if(products.image instanceof File) {
                 formData.append("image", products.image)
             }
+
+            updateCategories.forEach(c => {
+                formData.append("categories[]", String(c))
+            })
 
             await api.post(`/api/product/${id}`,
                 formData,

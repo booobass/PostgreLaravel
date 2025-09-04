@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -84,6 +86,38 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        Gate::authorize('update', $product);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|max:2048',
+            'stock' => 'required|integer|min:0',
+            'categories' => 'nullable|array',
+            'categories.*' => 'integer|exists:categories,id',
+        ]);
+
+        if($request->hasFile('image')) {
+            if($product->image) {
+                Storage::disk('public')->delete('images/' . $product->image);
+            }
+            $original = request()->file('image')->getClientOriginalName();
+            $name = date('YmdHis') . '_' . $original;
+            request()->file('image')->move('storage/images', $name);
+            $validated['image'] = $name;
+        }
+
+        $categories = $validated['categories'] ?? [];
+        unset($validated['categories']);
+
+        // products テーブルの更新
+        $product->update($validated);
+
+        // 中間テーブルの同期
+        $product->categories()->sync($categories);
+
+        return response()->json(['product' => $product->load('categories')]);
 
     }
 
@@ -92,6 +126,15 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        Gate::authorize('delete', $product);
+
+        if($product->image) {
+            Storage::disk('public')->delete('images/' . $product->image);
+        }
+
+        $product->categories()->detach();
+        $product->delete();
+
+        return response()->json(['product' => $product]);
     }
 }
