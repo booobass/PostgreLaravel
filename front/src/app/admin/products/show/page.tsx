@@ -27,6 +27,7 @@ const AdminShow = () => {
                         <p>{product.categories?.map(category => category.name).join("、")}</p>
                         <p>{product.description}</p>
                         <Link href={`../products/update/${product.id}`}>編集</Link>
+                        <Link href={`../products/delete/${product.id}`}>削除</Link>
                     </div>
                 ))}
             </div>
