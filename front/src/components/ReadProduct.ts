@@ -2,28 +2,42 @@
 
 import api from "@/lib/axios"
 import { Product } from "@/type/type"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
-export const ReadProduct = () => {
+type Props = {
+    keyword?: string
+    category_id?: string
+    sort?: string
+}
+
+export const ReadProduct = (params: Props = {}) => {
     const [products, setProducts] = useState<Product[]>([])
+    const [lastPage, setLastPage] = useState(1)
+    const [loading, setLoading] = useState(false)
 
-    const fetchProducts = async () => {
+    const fetchProducts = useCallback(async () => {
         try {
+            setLoading(true)
             const response = await api.get("/api/product", {
-                headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+                headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` },
+                params
             })
-            setProducts(response.data.products)
-            console.log(response.data.products)
+            setProducts(response.data.products.data)
+            setLastPage(response.data.products.last_page)
+            console.log("search",response.data.products)
 
         } catch {
             alert("商品取得出来ません")
+        } finally {
+            setLoading(false)
         }
-    }
+    }, [params])
+
 
     useEffect(() => {
             fetchProducts()
-        }, [])
+        }, [fetchProducts])
 
-    return {products}
+    return {products, lastPage, loading}
 
 }
