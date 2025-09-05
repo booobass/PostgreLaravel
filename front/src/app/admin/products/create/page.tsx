@@ -3,6 +3,7 @@
 import { ReadCategory } from "@/components/ReadCategory"
 import api from "@/lib/axios"
 import { Category } from "@/type/type"
+import Link from "next/link"
 import { useCallback, useState } from "react"
 import { useDropzone } from "react-dropzone"
 
@@ -149,6 +150,7 @@ const AdminProducts = () => {
                 </label>
                 <button>登録</button>
             </form>
+            <Link href={"/admin/categories"}>カテゴリー作成</Link>
         </div>
     )
 }

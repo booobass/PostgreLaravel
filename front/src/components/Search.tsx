@@ -1,6 +1,8 @@
 "use client"
 
+import { Category } from "@/type/type";
 import { useState } from "react";
+import { ReadCategory } from "./ReadCategory";
 
 type Props = {
     onSearch: (params: {
@@ -20,6 +22,8 @@ const Search = ({onSearch}: Props) => {
         onSearch({keyword, category_id: category, sort})
     }
 
+    const {categories} = ReadCategory()
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -35,9 +39,9 @@ const Search = ({onSearch}: Props) => {
                         name="category"
                         onChange={(e) => setCategory(e.target.value)}>
                         <option value="">全カテゴリー</option>
-                        <option value="1">旬</option>
-                        <option value="2">特売</option>
-                        <option value="3">もうすぐ発売</option>
+                        {categories.map((c: Category) => (
+                            <option key={c.id} value={c.id}>{c.name}</option>
+                        ))}
                     </select>
                 </label>
                 <label>
