@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,5 +46,14 @@ class AuthenticatedSessionController extends Controller
         $request->user()->currentAccessToken()->delete();
 
         return response()->json(['message' => 'ログアウトしました']);
+    }
+
+    public function index(Request $request): JsonResponse
+    {
+        $users = User::leftJoin('admins', 'users.id', '=', 'admins.user_id')
+            ->select('users.id', 'user_id', 'users.name', 'users.email', 'admins.role')
+            ->get();
+
+        return response()->json(['users' => $users]);
     }
 }

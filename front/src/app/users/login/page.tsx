@@ -3,6 +3,7 @@
 import { useAuth } from "@/context/AuthContext"
 import api from "@/lib/axios"
 import { User } from "@/type/type"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 const Login = () => {
@@ -20,6 +21,8 @@ const Login = () => {
 
     const {login} = useAuth()
 
+    const router = useRouter()
+
     const handleSubmit = async (e :React.FormEvent) => {
         e.preventDefault()
         try {
@@ -34,7 +37,14 @@ const Login = () => {
             localStorage.setItem("token", token)
             login(response.data.user, response.data.token)
             alert("ログインしました")
-            console.log(response.data)
+            console.log("UL", response.data)
+            if(response.data.user.is_admin && response.data.user.role === "Boss") {
+                router.push("../../admin/users")
+            } else if(response.data.user.is_admin) {
+                router.push("../../admin/products/show")
+            } else {
+                router.push("../users/products")
+            }
         } catch {
             alert("ログイン出来ません")
         }

@@ -37,3 +37,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 Route::get('/product/{product}', [ProductController::class, 'show']);
+Route::get('/user', [AuthenticatedSessionController::class, 'index']);

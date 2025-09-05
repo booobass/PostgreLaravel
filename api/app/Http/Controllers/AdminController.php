@@ -29,13 +29,20 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        $admin = new Admin();
-        $admin->user_id = Auth::user()->id;
-        $admin->role = $request->role;
+        $validated = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'role' => 'nullable|string|in:Boss,Editor',
+        ]);
 
-        $admin->save();
-
-        return response()->json(['admin' => $admin]);
+        if($validated['role']) {
+            Admin::updateOrCreate(
+                ['user_id' => $validated['user_id']],
+                ['role' => $validated['role']]
+            );
+        } else {
+            Admin::where('user_id', $validated['user_id'])->delete();;
+        }
+        return response()->json(['message' => '権限を更新しました']);
     }
 
     /**
