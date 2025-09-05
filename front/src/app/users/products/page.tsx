@@ -1,5 +1,6 @@
 "use client"
 import { ReadProduct } from "@/components/ReadProduct"
+import Search from "@/components/Search"
 import api from "@/lib/axios"
 import { Product } from "@/type/type"
 import { AxiosError } from "axios"
@@ -10,7 +11,10 @@ import { useState } from "react"
 
 const Products = () => {
 
-    const {products} = ReadProduct()
+    
+    const [params, setParams] = useState({})
+    
+    const {products, loading} = ReadProduct(params)
 
     const [quantity, setQuantity] = useState<{[key: number]: string}>({})
 
@@ -46,6 +50,8 @@ const Products = () => {
     return (
         <div>
             <h3>商品一覧</h3>
+            <Search onSearch={setParams} />
+            {loading && <p>読み込み中、、、</p>}
             <div>
                 {products.map((product :Product) => (
                     <div key={product.id}>

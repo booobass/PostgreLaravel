@@ -1,16 +1,22 @@
 "use client"
 
 import { ReadProduct } from "@/components/ReadProduct"
+import Search from "@/components/Search"
 import { Product } from "@/type/type"
 import Image from "next/image"
 import Link from "next/link"
+import { useState } from "react"
 
 const AdminShow = () => {
-    const {products} = ReadProduct()
+
+    const [params, setParams] = useState({})
+    const {products, loading} = ReadProduct(params)
 
     return (
         <div>
             <h4>商品管理</h4>
+            <Search onSearch={setParams} />
+            {loading && <p>読み込み中、、、</p>}
             <div>
                 {products.map((product: Product) => (
                     <div key={product.id}>

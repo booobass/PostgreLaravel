@@ -13,10 +13,36 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('categories')->get();
+        $query = Product::with('categories');
+
+        if($request->filled('keyword')) {
+            $query->where(function($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->keyword . '%');
+            });
+        }
+
+        if($request->filled('category_id')) {
+            $query->whereHas('categories', function($q) use ($request) {
+                $q->where('categories.id', $request->category_id);
+            });
+        }
+
+        if($request->filled('sort')) {
+            switch($request->sort) {
+                case 'price_asc': $query->orderBy('price', 'asc'); break;
+                case 'price_desc': $query->orderBy('price', 'desc'); break;
+                case 'stock_asc': $query->orderBy('stock', 'asc'); break;
+                case 'stock_desc': $query->orderBy('stock', 'desc'); break;
+            }
+        }
+
+        $products = $query->paginate(10);
+
         return response()->json(['products' => $products]);
+        // $products = Product::with('categories')->get();
+        // return response()->json(['products' => $products]);
     }
 
     /**
@@ -137,4 +163,5 @@ class ProductController extends Controller
 
         return response()->json(['product' => $product]);
     }
+
 }
