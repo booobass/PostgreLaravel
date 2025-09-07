@@ -3,6 +3,7 @@
 import { ReadCart } from "@/components/ReadCart";
 import { CartType } from "@/type/type";
 import Image from "next/image";
+import Link from "next/link";
 
 const Cart = () => {
 
@@ -44,6 +45,7 @@ const Cart = () => {
                     />
                 </div>
             ))}
+            <Link href={"../users/order/show"}>注文画面に進む</Link>
         </div>
     )
 }

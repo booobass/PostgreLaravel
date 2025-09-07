@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\OrderStatus;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderProduct;
@@ -20,6 +21,7 @@ class OrderService
                 'user_id' => $user->id,
                 'payment' => $orderData['payment'],
                 'total' => $cartProducts->sum(fn($product) => $product->quantity * $product->product->price),
+                'status' => OrderStatus::Pending
             ]);
 
             foreach($cartProducts as $cartProduct) {

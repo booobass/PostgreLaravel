@@ -20,7 +20,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::all();
+
+        return response()->json(['orders' => $orders]);
     }
 
     /**
@@ -39,6 +41,7 @@ class OrderController extends Controller
         $validated = $request->validate([
             'payment' => 'required|string',
             'total' => 'required|integer',
+            'status' => 'required|integer'
         ]);
 
         $order = $this->orderService->createOrder(Auth::user(), $validated);

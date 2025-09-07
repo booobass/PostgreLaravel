@@ -3,10 +3,12 @@
 import { ReadCart } from "@/components/ReadCart"
 import api from "@/lib/axios"
 import { tax } from "@/lib/tax"
+import { useRouter } from "next/navigation"
 import React, { useState } from "react"
 
 const ShowOrder = () => {
     const [payment, setPayment] = useState<"credit" | "cash">("credit")
+    const router = useRouter()
 
     const handleOrder = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -14,7 +16,8 @@ const ShowOrder = () => {
             const response = await api.post("/api/order/store",
                 {
                     payment: payment,
-                    total: totalPrice
+                    total: totalPrice,
+                    status: 0
                 },
                 {
                     headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
@@ -22,6 +25,7 @@ const ShowOrder = () => {
             )
             alert("注文しました")
             console.log(response.data.order)
+            router.push("../../thanks/show")
 
         } catch {
             alert("注文出来ません")

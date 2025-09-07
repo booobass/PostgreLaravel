@@ -43,3 +43,11 @@ export type CartType = {
     quantity: number;
     product?: Product;
 }
+
+export type OrderType = {
+    id: number;
+    user_id: number;
+    payment: string;
+    total: number;
+    status: number
+}
