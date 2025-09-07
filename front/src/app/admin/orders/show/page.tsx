@@ -26,6 +26,9 @@ const ShowOrder = () => {
         <div>
             <h4>注文管理</h4>
             <div>
+                <table>
+                    
+                </table>
                 {order.map((o :OrderType) => (
                     <div key={o.id}>
                         <p>{o.payment}</p>

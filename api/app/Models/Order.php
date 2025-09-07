@@ -27,4 +27,17 @@ class Order extends Model
     protected $casts = [
         'status' => OrderStatus::class
     ];
+
+    protected $appends = ['status_label'];
+
+    public function getStatusLabelAttribute()
+    {
+        return $this->status->label();
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'order_products')
+         ->withPivot('quantity', 'price');
+    }
 }
