@@ -1,6 +1,7 @@
 "use client"
 
 import api from "@/lib/axios"
+import Link from "next/link"
 import { useParams } from "next/navigation"
 
 const AdminDelete = () => {
@@ -27,6 +28,7 @@ const AdminDelete = () => {
             <h4>商品削除</h4>
             <p>削除してもよろしいですか？</p>
             <button onClick={handleDelete}>削除</button>
+            <Link href={"../../products/show"}>キャンセル</Link>
         </div>
     )
 }
