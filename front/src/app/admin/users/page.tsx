@@ -21,13 +21,26 @@ const AdminUser = () => {
         fetchUsers()
     }, [])
 
+    const [info, setInfo] = useState({
+        user_id: "",
+        role: ""
+    })
 
-    const updateRole = async (userId: number | undefined, role: string) => {
+    console.log("IN", info)
+    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>, userId: string) => {
+        setInfo({
+            user_id: userId,
+            role: e.target.value
+        })
+    }
+
+    const updateRole = async (e: React.FormEvent) => {
+        e.preventDefault()
         try {
             await api.post("/api/admin/store",
                 {
-                    user_id: userId,
-                    role
+                    user_id: info.user_id,
+                    role: info.role === "" ? null : info.role
                 }, {
                 headers: { "Authorization": `Bearer ${localStorage.getItem("token")}`}
             })
@@ -37,8 +50,6 @@ const AdminUser = () => {
 
         }
     }
-
-
 
 
     return (
@@ -63,13 +74,14 @@ const AdminUser = () => {
                             <td>{u.role ?? "User"}</td>
                             <td>
                                 <select
-                                    value={u.role ?? ""}
-                                    onChange={(e) => updateRole(u.id, e.target.value)}
+                                    name="role"
+                                    onChange={(e) => handleChange(e, String(u.id))}
                                 >
                                     <option value="">User</option>
                                     <option value="Boss">Boss</option>
                                     <option value="Editor">Editor</option>
                                 </select>
+                                <button onClick={updateRole}>更新</button>
                             </td>
                         </tr>
                     ))}

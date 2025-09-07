@@ -4,6 +4,7 @@ import { ReadCategory } from "@/components/ReadCategory"
 import api from "@/lib/axios"
 import { Category } from "@/type/type"
 import Image from "next/image"
+import Link from "next/link"
 import { useParams } from "next/navigation"
 import { useCallback, useEffect, useState } from "react"
 import { useDropzone } from "react-dropzone"
@@ -180,7 +181,8 @@ const AdminUpdate = () => {
                             onChange={handleChange} />
                     </label>
                     <button>登録</button>
-                </form>           
+                </form>
+                <Link href={"../../products/show"}>キャンセル</Link>        
         </div>
     )
 

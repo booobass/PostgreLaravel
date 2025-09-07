@@ -10,17 +10,17 @@ const Page = () => {
   const {products} = ReadProduct()
   console.log(products)
 
-  const specials = products.filter((p: Product) => (
-    p.categories?.some((c: Category) => c.name === "特売"))
-  )
+  // const specials = products.filter((p: Product) => (
+  //   p.categories?.some((c: Category) => c.name === "特売"))
+  // )
 
-  const seasonals = products.filter((p: Product) => (
-    p.categories?.some((c: Category) => c.name === "旬"))
-  )
+  // const seasonals = products.filter((p: Product) => (
+  //   p.categories?.some((c: Category) => c.name === "旬"))
+  // )
 
-  const newproducts = products.filter((p: Product) => (
-    p.categories?.some((c: Category) => c.name === "もうすぐ発売"))
-  )
+  // const newproducts = products.filter((p: Product) => (
+  //   p.categories?.some((c: Category) => c.name === "もうすぐ発売"))
+  // )
 
   const superlative: Product[] = []
   const special: Product[] = []
@@ -41,16 +41,16 @@ const Page = () => {
     }
   })
 
-  console.log("Seasonal", seasonals)
+  // console.log("Seasonal", seasonals)
 
-  console.log("Special", specials)
+  // console.log("Special", specials)
   return (
     <div>
       <h1 className={`${jose.className} text-5xl font-extrabold`}>L&apos;orto della Nonna</h1>
         <Card items={superlative} />
         <Card items={seasonal} />
         <Card items={special} />
-        <Card items={newproducts} />
+        <Card items={newproduct} />
       <footer className="display: flex">
         <p className="bg-[#eebbcd]">
           お時間ありましたら<br />

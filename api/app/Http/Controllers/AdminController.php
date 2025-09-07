@@ -34,10 +34,12 @@ class AdminController extends Controller
             'role' => 'nullable|string|in:Boss,Editor',
         ]);
 
-        if($validated['role']) {
+        $role = $validated['role'] ? : null;
+
+        if($role) {
             Admin::updateOrCreate(
                 ['user_id' => $validated['user_id']],
-                ['role' => $validated['role']]
+                ['role' => $role]
             );
         } else {
             Admin::where('user_id', $validated['user_id'])->delete();;

@@ -37,6 +37,8 @@ const AdminShow = () => {
                     </div>
                 ))}
             </div>
+            <Link href={"../products/create"}>商品登録</Link>
+            <Link href={"../users"}>ユーザー管理</Link>
         </div>
     )
 
