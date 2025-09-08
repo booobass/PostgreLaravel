@@ -151,6 +151,8 @@ const AdminProducts = () => {
                 <button>登録</button>
             </form>
             <Link href={"/admin/categories"}>カテゴリー作成</Link>
+            <Link href={"/admin/products/show"}>商品管理</Link>
+            <Link href={"/admin/users"}>ユーザー管理</Link>
         </div>
     )
 }

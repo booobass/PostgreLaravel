@@ -1,6 +1,6 @@
 import api from "@/lib/axios"
 
-export const DeleteOrder = () => {
+export const DeleteOrder = (onDeleted?: () => void) => {
     const handleDelete = async (id: number) => {
         try {
             await api.delete(`/api/order/${id}`,
@@ -9,6 +9,7 @@ export const DeleteOrder = () => {
                 }
             )
             alert("削除しました")
+            if(onDeleted) onDeleted()
         } catch {
             alert("削除出来ません")
         }

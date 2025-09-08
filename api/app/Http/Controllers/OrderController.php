@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class OrderController extends Controller
 {
@@ -81,5 +82,19 @@ class OrderController extends Controller
         $this->orderService->deleteOrder($id);
 
         return response()->json(['message' => '削除しました']);
+    }
+
+    public function updateStatus(Request $request, Order $order)
+    {
+        Gate::authorize('updateStatus', $order);
+
+        $validated = $request->validate([
+            'status' => 'required|integer'
+        ]);
+
+        $order->status = $validated['status'];
+        $order->save();
+
+        return response()->json(['order' => $order]);
     }
 }

@@ -89,6 +89,7 @@ const AdminUser = () => {
             </table>
             <Link href={"/admin/products/show"}>商品管理</Link>
             <Link href={"/admin/products/create"}>商品登録</Link>
+            <Link href={"/admin/orders/show"}>注文管理</Link>
         </div>
     )
 }
