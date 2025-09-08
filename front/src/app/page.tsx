@@ -5,6 +5,7 @@ import { ReadProduct } from "@/components/ReadProduct"
 import { jose } from "@/fonts/fonts"
 import { Category, Product } from "@/type/type"
 import Link from "next/link"
+import './globals.css'
 
 const Page = () => {
   const {products} = ReadProduct()
@@ -45,12 +46,14 @@ const Page = () => {
 
   // console.log("Special", specials)
   return (
-    <div>
-      <h1 className={`${jose.className} text-5xl font-extrabold`}>L&apos;orto della Nonna</h1>
-        <Card items={superlative} />
-        <Card items={seasonal} />
-        <Card items={special} />
-        <Card items={newproduct} />
+    <div className="warapper">
+      <div>
+          <h1 className={`${jose.className} text-5xl font-extrabold`}>L&apos;orto della Nonna</h1>
+          <Card items={superlative} />
+          <Card items={seasonal} />
+          <Card items={special} />
+          <Card items={newproduct} />
+      </div>
       <footer className="display: flex">
         <p className="bg-[#eebbcd]">
           お時間ありましたら<br />

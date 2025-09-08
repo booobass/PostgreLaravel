@@ -5,6 +5,7 @@ import api from "@/lib/axios"
 import { Product } from "@/type/type"
 import { AxiosError } from "axios"
 import Image from "next/image"
+import Link from "next/link"
 import { useState } from "react"
 
  
@@ -52,6 +53,7 @@ const Products = () => {
             <h3>商品一覧</h3>
             <Search onSearch={setParams} />
             {loading && <p>読み込み中、、、</p>}
+            <Link href={"../users/cart"}>カートを確認</Link>
             <div>
                 {products.map((product :Product) => (
                     <div key={product.id}>

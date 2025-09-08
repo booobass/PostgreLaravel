@@ -46,6 +46,7 @@ const Cart = () => {
                 </div>
             ))}
             <Link href={"../users/order/show"}>注文画面に進む</Link>
+            <Link href={"../users/products"}>戻る</Link>
         </div>
     )
 }
