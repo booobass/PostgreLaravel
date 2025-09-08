@@ -15,13 +15,14 @@ const Products = () => {
     
     const [params, setParams] = useState({})
     
-    const {products, loading} = ReadProduct(params)
+    const {products, loading, fetchProducts} = ReadProduct(params)
 
     const [quantity, setQuantity] = useState<{[key: number]: string}>({})
 
     const [error, setError] = useState<{ [key: number]: string | null}>({})
 
     console.log("QQ",quantity)
+    console.log("PP", params)
 
     const handleCart = async (e: React.FormEvent<HTMLFormElement>, product_id: number) => {
         e.preventDefault()
@@ -38,6 +39,7 @@ const Products = () => {
             )
             alert("カートに入りました")
             setQuantity({...quantity, [product_id]: ""})
+            fetchProducts()
         } catch (err: unknown) {
             alert("カートに入れられません")
             if (err instanceof AxiosError) {
