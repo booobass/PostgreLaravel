@@ -26,6 +26,13 @@ export type Category = {
     name: string;
 }
 
+export type OrderProduct = {
+    order_id: number;
+    product_id: number;
+    quantity: number;
+    price: number;
+}
+
 export type Product = {
     id: number;
     name: string;
@@ -34,6 +41,7 @@ export type Product = {
     price: number;
     stock: number;
     categories?: Category[];
+    pivot: OrderProduct;
 }
 
 export type CartType = {
@@ -46,8 +54,9 @@ export type CartType = {
 
 export type OrderType = {
     id: number;
-    user_id: number;
     payment: string;
     total: number;
-    status: number
+    status_label: string;
+    user: User;
+    products: Product[];
 }

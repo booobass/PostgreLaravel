@@ -25,7 +25,7 @@ const ShowOrder = () => {
             )
             alert("注文しました")
             console.log(response.data.order)
-            router.push("../../thanks/show")
+            router.push("../../users/thanks/show")
 
         } catch {
             alert("注文出来ません")

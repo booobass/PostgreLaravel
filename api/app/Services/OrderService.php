@@ -39,4 +39,15 @@ class OrderService
 
         });
     }
+
+    public function deleteOrder(int $id): void
+    {
+        DB::transaction(function () use ($id) {
+            $order = Order::with('orderProducts')->findOrFail($id);
+
+            $order->orderProducts()->delete();
+            $order->delete();
+
+        });
+    }
 }
