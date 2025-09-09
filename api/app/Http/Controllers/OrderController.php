@@ -26,6 +26,12 @@ class OrderController extends Controller
         return response()->json(['orders' => $orders]);
     }
 
+    public function userOrders()
+    {
+        $orders = Order::where('user_id', Auth::id())->with('products')->get();
+
+        return response()->json(['orders' => $orders]);
+    }
     /**
      * Show the form for creating a new resource.
      */

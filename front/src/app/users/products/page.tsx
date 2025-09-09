@@ -55,7 +55,8 @@ const Products = () => {
             <h3>商品一覧</h3>
             <Search onSearch={setParams} />
             {loading && <p>読み込み中、、、</p>}
-            <Link href={"../users/cart"}>カートを確認</Link>
+            <Link href={"/users/cart"}>カートを確認</Link>
+            <Link href={"/users/order/history"}>購入履歴</Link>
             <div>
                 {products.map((product :Product) => (
                     <div key={product.id}>

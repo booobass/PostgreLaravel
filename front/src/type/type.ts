@@ -57,6 +57,7 @@ export type OrderType = {
     payment: string;
     total: number;
     status_label: string;
+    created_at: string;
     user: User;
     products: Product[];
 }

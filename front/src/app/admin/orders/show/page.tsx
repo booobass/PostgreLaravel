@@ -87,7 +87,7 @@ const ShowOrder = () => {
                                     {index === 0 && (
                                         <>
                                             <td rowSpan={o.products.length}>{o.total}</td>
-                                            <td rowSpan={o.products.length}>{o.payment}</td>
+                                            <td rowSpan={o.products.length}>{o.payment === "credit" ? "クレジット" : "現金"}</td>
                                             <td rowSpan={o.products.length}>{o.status_label}</td>
                                             <td rowSpan={o.products.length}>
                                                 <select
