@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
+use App\Policies\CategoryPolicy;
 use App\Policies\OrderPolicy;
 use App\Policies\ProductPolicy;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -31,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
 
     protected $policies = [
         Product::class => ProductPolicy::class,
-        Order::class => OrderPolicy::class
+        Order::class => OrderPolicy::class,
+        Category::class => CategoryPolicy::class
     ];
 }
