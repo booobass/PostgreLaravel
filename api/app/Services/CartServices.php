@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CartServices
@@ -43,6 +44,20 @@ class CartServices
         $product->save();
 
         return $cart;
+        });
+    }
+
+    public function deleteCart(int $id)
+    {
+        DB::transaction(function () use ($id) {
+
+            $cart = Cart::where('user_id', Auth::id())->findOrFail($id);
+
+            $product = Product::findOrFail($cart->product_id);
+            $product->stock += $cart->quantity;
+            $product->save();
+
+            $cart->delete();
         });
     }
 }

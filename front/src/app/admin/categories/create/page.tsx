@@ -1,9 +1,13 @@
 "use client"
 
 import api from "@/lib/axios"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 const CreateCategory = () => {
+
+    const router = useRouter()
 
     const [category, setCategory] = useState("")
 
@@ -16,6 +20,7 @@ const CreateCategory = () => {
                 headers: {"Authorization": `Bearer ${localStorage.getItem("token")}`}
             })
             alert("カテゴリー登録")
+            router.push("/admin/products/create")
         } catch {
             alert("登録出来ません")
         }
@@ -34,6 +39,8 @@ const CreateCategory = () => {
                 </label>
                 <button>登録</button>
             </form>
+            <Link href={"/admin/categories/show"}>カテゴリー一覧</Link>
+            <Link href={"/admin/products/create"}>商品登録</Link>
         </div>
     )
 }

@@ -143,7 +143,7 @@ const AdminProducts = () => {
                 ))}
                 <label>在庫数：
                     <input
-                        type="text"
+                        type="number"
                         name="stock"
                         value={product.stock}
                         onChange={handleChange} />
