@@ -84,7 +84,10 @@ const Products = () => {
                                         value={quantity[product.id] || ""}
                                         onChange={(e) => setQuantity({...quantity, [product.id]: e.target.value})} />
                                 </label>
-                                <button>カートに入れる</button>
+                                <button
+                                    disabled={product.stock ? false : true}
+                                >カートに入れる
+                                </button>
                                 {error[product.id] && <p
                                     onClick={() => setError((prev) => ({...prev, [product.id]: null}))} 
                                     className="text-red-500">{error[product.id]}OK?</p>}

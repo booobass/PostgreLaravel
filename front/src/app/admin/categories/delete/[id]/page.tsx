@@ -39,7 +39,7 @@ const DeleteCategory = () => {
     return (
         <div>
             <h4>カテゴリー削除</h4>
-            <p>{singleCategory?.name}削除してもよろしいですか？</p>
+            <p>{singleCategory?.name}を削除してもよろしいですか？</p>
             <button onClick={handleDelete}>削除</button>
             <Link href={"/admin/categories/show"}>キャンセル</Link>
         </div>

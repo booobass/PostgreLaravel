@@ -175,7 +175,7 @@ const AdminUpdate = () => {
                     ))}
                     <label>在庫数：
                         <input
-                            type="text"
+                            type="number"
                             name="stock"
                             value={products.stock}
                             onChange={handleChange} />

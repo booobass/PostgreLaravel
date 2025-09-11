@@ -12,7 +12,7 @@ const ShowCategory = () => {
 
     return (
         <div>
-            <h4>カテゴリー</h4>
+            <h4>カテゴリー一覧</h4>
             <table>
                 <thead>
                     <tr>
@@ -23,7 +23,9 @@ const ShowCategory = () => {
                     {categories.map((c) => (
                         <tr key={c.id}>
                             <td>{c.name}</td>
-                            <td>編集</td>
+                            <td>
+                                <Link href={`/admin/categories/update/${c.id}`}>編集</Link>
+                            </td>
                             <td>
                                 <Link href={`/admin/categories/delete/${c.id}`}>削除</Link>
                             </td>
@@ -31,6 +33,8 @@ const ShowCategory = () => {
                     ))}
                 </tbody>
             </table>
+            <Link href={"/admin/categories/create"}>カテゴリー作成</Link>
+            <Link href={"/admin/products/create"}>商品登録</Link>
         </div>
     )
 }
