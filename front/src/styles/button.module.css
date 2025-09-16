@@ -1,0 +1,6 @@
+.submitBtn {
+    border-bottom: 2px solid var(--orange);
+    padding: 2px;
+    font-weight: 600;
+    cursor: pointer;
+}

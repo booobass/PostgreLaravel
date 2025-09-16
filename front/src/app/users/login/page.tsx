@@ -2,6 +2,8 @@
 
 import { useAuth } from "@/context/AuthContext"
 import api from "@/lib/axios"
+import btn from "@/styles/button.module.css"
+import styles from "@/styles/form.module.css"
 import { User } from "@/type/type"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
@@ -51,27 +53,31 @@ const Login = () => {
     }
 
     return (
-        <div>
-            <h2>ログイン</h2>
-            <form onSubmit={handleSubmit}>
-                <label>メールアドレス：
-                    <input
-                        type="text"
-                        name="email"
-                        value={user.email}
-                        onChange={handleChange}
-                        required />
-                </label>
-                <label>パスワード：
-                    <input
-                        type="text"
-                        name="password"
-                        value={user.password}
-                        onChange={handleChange}
-                        required />
-                </label>
-                <button>ログイン</button>
-            </form>
+        <div className="warapper">
+            <div className={styles.main}>
+                <h2 className="text-2xl font-bold">ログインページ</h2>
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <label>メールアドレス：
+                        <input
+                            type="text"
+                            name="email"
+                            value={user.email}
+                            onChange={handleChange}
+                            required
+                            className={styles.input} />
+                    </label>
+                    <label className={`${styles.label} mt-3`}>パスワード：
+                        <input
+                            type="text"
+                            name="password"
+                            value={user.password}
+                            onChange={handleChange}
+                            required
+                            className={`${styles.input}`} />
+                    </label>
+                    <button className={`${btn.submitBtn} mt-6 ml-38`}>ログイン</button>
+                </form>
+            </div>
         </div>
     )
 }

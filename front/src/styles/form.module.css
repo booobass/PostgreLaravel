@@ -1,0 +1,29 @@
+.main {
+    width: 600px;
+    background-color: var(--orange);
+    justify-items: center;
+    padding: 30px 0;
+    border-radius: 3px;
+}
+
+.form {
+    cursor: pointer;
+    margin-top: 25px;
+    padding: 25px;
+    border-radius: 3px;
+    background-color: var(--white);
+}
+
+.label {
+    display: block;
+}
+
+.input {
+    border-bottom: 2px solid var(--orange);
+    line-height: 28px;
+    padding-left: 8px;
+    outline: none;
+}
+.input:focus {
+    background: var(--white);
+}
