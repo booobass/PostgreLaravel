@@ -37,7 +37,7 @@ export default function AdminLayout({children}: {children: React.ReactNode}) {
         // }
     }, [user, router, loading])
     return (
-        <div className="text-xl text-black-500 bg-[#f9fafb]">
+        <div className="max-w-5xl text-xl text-black-500 bg-[#f9fafb]">
             {children}
         </div>
     )

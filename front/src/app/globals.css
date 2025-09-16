@@ -1,6 +1,18 @@
 @import "tailwindcss";
 
+:root {
+    --white: #f9fafb;
+    --orange : #f3bc9a;
+}
+
+* {
+    list-style: none;
+    text-decoration: none;
+    color: #333;
+}
+
 .warapper {
-    max-width: 600px;
+    max-width: 800px;
     margin:30px auto;
+    justify-items: center;
 }
