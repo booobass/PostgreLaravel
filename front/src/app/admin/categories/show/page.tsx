@@ -1,6 +1,8 @@
 "use client"
 
 import { ReadCategory } from "@/components/ReadCategory"
+import btn from "@/styles/button.module.css"
+import tb from "@/styles/table.module.css"
 import Link from "next/link"
 
 const ShowCategory = () => {
@@ -11,30 +13,35 @@ const ShowCategory = () => {
     console.log("SC", categories)
 
     return (
-        <div>
-            <h4>カテゴリー一覧</h4>
-            <table>
-                <thead>
-                    <tr>
-                        <th colSpan={3}>カテゴリー</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {categories.map((c) => (
-                        <tr key={c.id}>
-                            <td>{c.name}</td>
-                            <td>
-                                <Link href={`/admin/categories/update/${c.id}`}>編集</Link>
-                            </td>
-                            <td>
-                                <Link href={`/admin/categories/delete/${c.id}`}>削除</Link>
-                            </td>
+        <div className="warapper">
+            <div className={`${tb.main} w-[600px]`}>
+                <h4 className="text-xl font-bold">カテゴリー一覧</h4>
+                <table className="mt-6">
+                    <thead>
+                        <tr>
+                            <th className="w-[230px]">カテゴリー名</th>
+                            <th colSpan={2}>変更</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-            <Link href={"/admin/categories/create"}>カテゴリー作成</Link>
-            <Link href={"/admin/products/create"}>商品登録</Link>
+                    </thead>
+                    <tbody className={tb.tbody}>
+                        {categories.map((c) => (
+                            <tr key={c.id}>
+                                <td className="text-center">{c.name}</td>
+                                <td>
+                                    <Link href={`/admin/categories/update/${c.id}`} className={btn.adminBtn}>編集</Link>
+                                </td>
+                                <td>
+                                    <Link href={`/admin/categories/delete/${c.id}`} className={btn.adminBtn}>削除</Link>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                <div className={`${btn.linkBtn} mt-8 font-bold w-[400px]`}>
+                    <Link href={"/admin/categories/create"}>カテゴリー作成</Link>
+                    <Link href={"/admin/products/create"}>商品登録</Link>
+                </div>
+            </div>
         </div>
     )
 }

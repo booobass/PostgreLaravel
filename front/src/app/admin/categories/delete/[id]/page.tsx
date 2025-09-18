@@ -2,6 +2,8 @@
 
 import { ReadCategory } from "@/components/ReadCategory"
 import api from "@/lib/axios"
+import btn from "@/styles/button.module.css"
+import styles from "@/styles/form.module.css"
 import Link from "next/link"
 import { useParams, useRouter } from "next/navigation"
 
@@ -37,11 +39,15 @@ const DeleteCategory = () => {
     }
 
     return (
-        <div>
-            <h4>カテゴリー削除</h4>
-            <p>{singleCategory?.name}を削除してもよろしいですか？</p>
-            <button onClick={handleDelete}>削除</button>
-            <Link href={"/admin/categories/show"}>キャンセル</Link>
+        <div className="warapper">
+            <div className={`${styles.admin_main} w-[600px]`}>
+                <h4 className="text-xl font-bold">カテゴリー削除</h4>
+                <p className="mt-8">{singleCategory?.name}を削除してもよろしいですか？</p>
+                <div className={`${btn.linkBtn} mt-8 w-[380px]`}>
+                    <button onClick={handleDelete} className="font-bold">削除</button>
+                    <Link href={"/admin/categories/show"}>キャンセル</Link>
+                </div>
+            </div>
         </div>
     )
 

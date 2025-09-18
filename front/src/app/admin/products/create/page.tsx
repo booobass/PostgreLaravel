@@ -2,6 +2,8 @@
 
 import { ReadCategory } from "@/components/ReadCategory"
 import api from "@/lib/axios"
+import btn from "@/styles/button.module.css"
+import styles from "@/styles/form.module.css"
 import { Category } from "@/type/type"
 import Link from "next/link"
 import { useCallback, useState } from "react"
@@ -99,60 +101,70 @@ const AdminProducts = () => {
     console.log(categories)
 
     return (
-        <div>
-            <h4>商品登録</h4>
-            <form onSubmit={handleSubmit}>
-                <label>商品名：
-                    <input
-                        type="text"
-                        name="name"
-                        value={product.name}
-                        onChange={handleChange} />
-                </label>
-                <label>値段：
-                    <input
-                        type="text"
-                        name="price"
-                        value={product.price}
-                        onChange={handleChange} />
-                </label>
-                <label>
-                    <div {...getRootProps()}>
-                        <input {...getInputProps()} />
-                        {isDragActive}
-                        <p>ここに画像をドロップして下さい</p>
-                    </div>
-                    {image && <p>選択した画像：{image.name}</p>}
-                </label>
-                <label>商品説明：
-                    <textarea
-                        name="description"
-                        value={product.description}
-                        onChange={handleChange}
-                        rows={5} ></textarea>
-                </label>
-                {categories.map((c :Category) => (
-                    <label key={c.id}>{c.name}
+        <div className="warapper">
+            <div className={`${styles.admin_main} w-[700px]`}>
+                <h4 className="text-xl font-bold">商品登録</h4>
+                <form onSubmit={handleSubmit} className={styles.admin_form}>
+                    <label className={`${styles.label}`}>商品名：
                         <input
-                            type="checkbox"
-                            name="categories"
-                            value={c.id}
-                            checked={selectedCategories.includes(c.id)}
-                            onChange={handleCategoryChange} />
+                            type="text"
+                            name="name"
+                            value={product.name}
+                            onChange={handleChange}
+                            className={styles.admin_input} />
                     </label>
-                ))}
-                <label>在庫数：
-                    <input
-                        type="number"
-                        name="stock"
-                        value={product.stock}
-                        onChange={handleChange} />
-                </label>
-                <button>登録</button>
-            </form>
-            <Link href={"/admin/categories/create"}>カテゴリー作成</Link>
-            <Link href={"/admin/products/show"}>商品管理</Link>
-            <Link href={"/admin/users"}>ユーザー管理</Link>
+                    <label className={`${styles.label} mt-3`}>値段：
+                        <input
+                            type="text"
+                            name="price"
+                            value={product.price}
+                            onChange={handleChange}
+                            className={styles.admin_input} />
+                    </label>
+                    <label className={`${styles.label} mt-3`}>
+                        <div {...getRootProps()}>
+                            <input {...getInputProps()} />
+                            {isDragActive}
+                            <p>ここに画像をドロップして下さい</p>
+                        </div>
+                        {image && <p>選択した画像：{image.name}</p>}
+                    </label>
+                    <label className={`${styles.label} mt-3`}>商品説明：
+                        <textarea
+                            name="description"
+                            value={product.description}
+                            onChange={handleChange}
+                            rows={1}
+                            className={styles.admin_input} ></textarea>
+                    </label>
+                    <p className="mt-3">カテゴリー選択</p>
+                    {categories.map((c :Category) => (                       
+                        <label key={c.id} className={`${styles.label}`}>{c.name}：
+                            <input
+                                type="checkbox"
+                                name="categories"
+                                value={c.id}
+                                checked={selectedCategories.includes(c.id)}
+                                onChange={handleCategoryChange}
+                                className={styles.admin_input} />
+                        </label>
+                    ))}
+                    <label className={`${styles.label} mt-3`}>在庫数：
+                        <input
+                            type="number"
+                            name="stock"
+                            value={product.stock}
+                            onChange={handleChange}
+                            className={styles.admin_input} />
+                    </label>
+                    <button className={`${btn.adminBtn} mt-6 ml-50 font-bold`}>登録</button>
+                </form>
+                <div className={`${btn.linkBtn} mt-10 w-[500px]`}>
+                    <Link href={"/admin/categories/create"}>カテゴリー作成</Link>
+                    <Link href={"/admin/products/show"}>商品管理</Link>
+                    <Link href={"/admin/users"}>ユーザー管理</Link>
+                </div>
+            </div>
         </div>
     )
 }

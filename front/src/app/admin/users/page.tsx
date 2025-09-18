@@ -1,6 +1,8 @@
 "use client"
 
 import api from "@/lib/axios";
+import btn from "@/styles/button.module.css";
+import tb from "@/styles/table.module.css";
 import { User } from "@/type/type";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -47,49 +49,54 @@ const AdminUser = () => {
             alert("登録しました")
             fetchUsers()
         } catch {
-
+            alert("更新できません")
         }
     }
 
 
     return (
-        <div>
-            <h3>権限</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>名前</th>
-                        <th>Email</th>
-                        <th>権限</th>
-                        <th>変更</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map((u: User) => (
-                        <tr key={u.id}>
-                            <td>{u.id}</td>
-                            <td>{u.name}</td>
-                            <td>{u.email}</td>
-                            <td>{u.role ?? "User"}</td>
-                            <td>
-                                <select
-                                    name="role"
-                                    onChange={(e) => handleChange(e, String(u.id))}
-                                >
-                                    <option value="">User</option>
-                                    <option value="Boss">Boss</option>
-                                    <option value="Editor">Editor</option>
-                                </select>
-                                <button onClick={updateRole}>更新</button>
-                            </td>
+        <div className="warapper">
+            <div className={`${tb.main} w-2xl`}>
+                <h3 className="text-xl font-bold">登録者の権限</h3>
+                <table className={`mt-4`}>
+                    <thead>
+                        <tr>
+                            <th>名前</th>
+                            <th>Email</th>
+                            <th>権限</th>
+                            <th colSpan={2}>変更</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-            <Link href={"/admin/products/show"}>商品管理</Link>
-            <Link href={"/admin/products/create"}>商品登録</Link>
-            <Link href={"/admin/orders/show"}>注文管理</Link>
+                    </thead>
+                    <tbody className={tb.tbody}>
+                        {users.map((u: User) => (
+                            <tr key={u.id}>
+                                <td>{u.name}</td>
+                                <td>{u.email}</td>
+                                <td>{u.role ?? "User"}</td>
+                                <td>
+                                    <select
+                                        name="role"
+                                        onChange={(e) => handleChange(e, String(u.id))}
+                                        className={btn.adminBtn}
+                                    >
+                                        <option value="">User</option>
+                                        <option value="Boss">Boss</option>
+                                        <option value="Editor">Editor</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button onClick={updateRole} className={btn.adminBtn}>更新</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                <div className={`${btn.linkBtn} mt-10 w-[400px]`}>
+                    <Link href={"/admin/products/show"}>商品管理</Link>
+                    <Link href={"/admin/products/create"}>商品登録</Link>
+                    <Link href={"/admin/orders/show"}>注文管理</Link>
+                </div>
+            </div>
         </div>
     )
 }
