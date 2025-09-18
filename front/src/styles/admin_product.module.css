@@ -1,0 +1,11 @@
+.main {
+    background-color: var(--white);
+    padding: 30px 0;
+    border-radius: 3px;
+    justify-items: center;
+}
+
+.product {
+    display: flex;
+    border-bottom: 2px dashed #333;
+}

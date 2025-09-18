@@ -2,14 +2,18 @@
 
 import { ReadCategory } from "@/components/ReadCategory"
 import api from "@/lib/axios"
+import btn from "@/styles/button.module.css"
+import styles from "@/styles/form.module.css"
 import { Category } from "@/type/type"
 import Image from "next/image"
 import Link from "next/link"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { useCallback, useEffect, useState } from "react"
 import { useDropzone } from "react-dropzone"
 
 const AdminUpdate = () => {
+
+    const router = useRouter()
 
     const [products, setProduct] = useState({
         name: "",
@@ -75,6 +79,7 @@ const AdminUpdate = () => {
                 }
             )
             alert("更新しました")
+            router.push("/admin/products/show")
         } catch {
             alert("更新出来ません")
         }
@@ -121,24 +126,27 @@ const AdminUpdate = () => {
     
 
     return (
-        <div>
-            <h4>商品更新</h4>
-                <form onSubmit={handleSubmit}>
-                    <label>商品名：
+        <div className="warapper">
+            <div className={`${styles.admin_main} w-[700px]`}>
+                <h4 className="text-xl font-bold">商品更新</h4>
+                <form onSubmit={handleSubmit} className={styles.admin_form}>
+                    <label className={`${styles.label}`}>商品名：
                         <input
                             type="text"
                             name="name"
                             value={products.name}
-                            onChange={handleChange} />
+                            onChange={handleChange}
+                            className={styles.admin_input} />
                     </label>
-                    <label>値段：
+                    <label className={`${styles.label} mt-3`}>値段：
                         <input
                             type="text"
                             name="price"
                             value={products.price}
-                            onChange={handleChange} />
+                            onChange={handleChange}
+                            className={styles.admin_input} />
                     </label>
-                    <div>
+                    <div className="mt-3">
                         <p>現在の写真</p>
                         {typeof products.image === "string" && products.image && (
                             <Image
@@ -148,7 +156,7 @@ const AdminUpdate = () => {
                                 alt={`${products.name}`}/>
                         )}
                     </div>
-                    <label>写真変更
+                    <label className={`${styles.label} mt-3`}>写真変更
                         <div {...getRootProps()}>
                             <input {...getInputProps()} />
                             {isDragActive}
@@ -156,33 +164,39 @@ const AdminUpdate = () => {
                         </div>
                         {products.image && <p>選択した画像：{products.image instanceof File ? products.image.name : products.image}</p>}
                     </label>
-                    <label>商品説明：
+                    <label className={`${styles.label} mt-3`}>商品説明：
                         <textarea
                             name="description"
                             value={products.description}
                             onChange={handleChange}
-                            rows={5} ></textarea>
+                            rows={1}
+                            className={styles.admin_input} ></textarea>
                     </label>
                     {categories.map((c :Category) => (
-                        <label key={c.id}>{c.name}
+                        <label key={c.id} className={`${styles.label} mt-3`}>{c.name}：
                             <input
                                 type="checkbox"
                                 name="categories"
                                 value={c.id}
                                 checked={updateCategories.includes(c.id)}
-                                onChange={handleCategoryChange} />
+                                onChange={handleCategoryChange}
+                                className={styles.admin_input} />
                         </label>
                     ))}
-                    <label>在庫数：
+                    <label className={`${styles.label}`}>在庫数：
                         <input
                             type="number"
                             name="stock"
                             value={products.stock}
-                            onChange={handleChange} />
+                            onChange={handleChange}
+                            className={styles.admin_input} />
                     </label>
-                    <button>登録</button>
+                    <button className={`${btn.adminBtn} mt-6 ml-55 font-bold`}>更新</button>
                 </form>
-                <Link href={"../../products/show"}>キャンセル</Link>        
+                <div className={`${btn.linkBtn} mt-3 w-[160px]`}>
+                    <Link href={"../../products/show"}>キャンセル</Link>        
+                </div>
+            </div>
         </div>
     )
 
