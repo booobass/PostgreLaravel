@@ -29,6 +29,8 @@ const AdminUpdate = () => {
             [e.target.name]: e.target.value
         })
     }
+    
+    const [updateCategories, setUpdateCategories] = useState<number[]>([])
 
     const params = useParams()
     const id = params.id as string
@@ -37,6 +39,7 @@ const AdminUpdate = () => {
         const getSingleProduct = async (id: string) => {
             const response = await api.get(`/api/product/${id}`)
             const singleProduct = await response.data.product
+            console.log("sP", singleProduct)
             setProduct({
                 name: singleProduct.name,
                 price: singleProduct.price,
@@ -111,7 +114,6 @@ const AdminUpdate = () => {
 
     const {categories} = ReadCategory()
 
-    const [updateCategories, setUpdateCategories] = useState<number[]>([])
     console.log("cc", categories)
     console.log("Uc", updateCategories)
 

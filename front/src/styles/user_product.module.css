@@ -1,0 +1,36 @@
+.main {
+    width: 800px;
+    justify-items: center;
+}
+
+.title {
+    width: 180px;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 2px solid var(--orange);
+    text-align: center;
+}
+
+.product {
+    width: 630px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.content {
+    border: 3px solid transparent;
+    border-radius: 3px;
+    background:
+        linear-gradient(to right, #fff 50%, var(--orange) 100%) bottom / 100% 3px no-repeat, /*幅、高さ、繰り返し*/
+        linear-gradient(to bottom, #fff 50%, var(--orange) 100%) right / 3px 100% no-repeat;
+    background-origin: border-box;
+}
+
+.category {
+    display: inline-block;
+    border: 2px solid var(--orange);
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 2px 6px;
+}

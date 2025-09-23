@@ -63,7 +63,7 @@ const Search = ({onSearch}: Props) => {
                         <option value="stock_desc">在庫が多い順</option>
                     </select>
                 </label>
-                <button className={`${btn.adminBtn} mt-3 ml-50`}>検索</button>
+                <button className={`${btn.adminBtn} mt-3 ml-50 font-bold`}>検索</button>
             </form>
         </div>
     )

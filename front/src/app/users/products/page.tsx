@@ -2,12 +2,14 @@
 import { ReadProduct } from "@/components/ReadProduct"
 import Search from "@/components/Search"
 import api from "@/lib/axios"
+import btn from "@/styles/button.module.css"
+import form from "@/styles/form.module.css"
+import styles from "@/styles/user_product.module.css"
 import { Product } from "@/type/type"
 import { AxiosError } from "axios"
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
-
  
 
 const Products = () => {
@@ -51,41 +53,52 @@ const Products = () => {
 
 
     return (
-        <div>
-            <h3>商品一覧</h3>
-            <Search onSearch={setParams} />
-            {loading && <p>読み込み中、、、</p>}
-            <Link href={"/users/cart"}>カートを確認</Link>
-            <Link href={"/users/order/history"}>購入履歴</Link>
-            <div>
-                {products.map((product :Product) => (
-                    <div key={product.id}>
-                        <div>
-                            <h4>{product.name}</h4>
-                            <p>{product.price}</p>
-                            <Image
-                                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${product.image}`}
-                                height={100}
-                                width={100}
-                                alt={product.name}
-                                priority
-                                />
-                            <p>{product.stock}個</p>
-                            <p>{product.description}</p>
-                            <p>{product.categories?.map(category => category.name).join(", ")}</p>
-                        </div>
-                        <div>
+        <div className="warapper">
+            <div className={`${styles.main}`}>
+                <div className={`${styles.title}`}>
+                    <h3>商品一覧</h3>
+                </div>
+                <Search onSearch={setParams} />
+                {loading && <p>読み込み中、、、</p>}
+                <div className={`${btn.userLink} w-[300px]`}>
+                    <Link href={"/users/order/history"}>購入履歴</Link>
+                    <Link href={"/users/cart"}>カートを確認</Link>
+                </div>
+                <div className={`${styles.product} mt-8`}>
+                    {products.map((product :Product) => (
+                        <div key={product.id} className={`${styles.content}`}>
+                            <div>
+                                <p className={`${styles.category}`}>{product.categories?.map(category => category.name).join(", ")}</p>
+                                <div className="flex mt-3 justify-center">
+                                    <Image
+                                        src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${product.image}`}
+                                        height={100}
+                                        width={100}
+                                        alt={product.name}
+                                        priority
+                                        />
+                                    <div className="ml-6 content-center">
+                                        <p className="font-bold">{product.name}：¥{product.price}</p>
+                                        <p>在庫：{product.stock}個</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p className="text-center mt-3">{product.description}</p>
+                                </div>
+                            </div>
                             <form onSubmit={(e) => handleCart(e, product.id)}>
                                 <input type="hidden" name="product_id" value={product.id} />
-                                <label>個数：
+                                <label className={form.label}>個数：
                                     <input
                                         type="number"
                                         name="quantity"
                                         value={quantity[product.id] || ""}
-                                        onChange={(e) => setQuantity({...quantity, [product.id]: e.target.value})} />
+                                        onChange={(e) => setQuantity({...quantity, [product.id]: e.target.value})}
+                                        className={form.admin_input} />
                                 </label>
                                 <button
                                     disabled={product.stock ? false : true}
+                                    className={`${btn.submitBtn} mt-6 ml-26 mb-6`}
                                 >カートに入れる
                                 </button>
                                 {error[product.id] && <p
@@ -93,8 +106,8 @@ const Products = () => {
                                     className="text-red-500">{error[product.id]}OK?</p>}
                             </form>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     )

@@ -4,9 +4,12 @@ import api from "@/lib/axios"
 import btn from "@/styles/button.module.css"
 import styles from "@/styles/form.module.css"
 import { User } from "@/type/type"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 const Register = () => {
+
+    const router = useRouter()
 
     const [user, setUser] = useState<User>({
         name: "",
@@ -33,6 +36,7 @@ const Register = () => {
                 }
             )
             alert("登録しました")
+            router.push("/users/login")
         } catch {
             alert("登録出来ません")
         }
