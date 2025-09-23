@@ -1,5 +1,6 @@
 "use client"
 
+import category from "@/styles/category.module.css"
 import { Product } from "@/type/type"
 import Image from "next/image"
 
@@ -7,20 +8,31 @@ const Card = ({items} :{items: Product[]}) => {
     const title = items[0]?.categories?.map((c) => c.name).join(", ") || ""
     return (
         <div>
-            <h2>{title}</h2>
-            {items.map((s: Product) => (
-                <div key={s.id}>
-                    <h3>{s.name}</h3>
-                    <Image
-                    src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${s.image}`}
-                    height={100}
-                    width={100}
-                    alt={s.name}
-                    priority
-                    />
-                    <p>{s.price}円</p>
+            {title ? (
+                <div>
+                    <div className={`${category.main}`}>
+                        <h2>{title}</h2>
+                    </div>
+                    {items.map((s: Product) => (
+                        <div key={s.id} className={`${category.content}`}>
+                            <div>
+                                <Image
+                                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${s.image}`}
+                                height={100}
+                                width={100}
+                                alt={s.name}
+                                priority
+                                />
+                                <div className="flex">
+                                    <h3>{s.name}：</h3>
+                                    <p>¥{s.price}</p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-            ))}
+
+            ) : (null)}
 
         </div>
     )

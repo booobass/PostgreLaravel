@@ -23,3 +23,15 @@
     display: flex;
     justify-content: space-around;
 }
+
+.userLink a {
+    display: block;
+    font-weight: bold;
+    color: #444;
+}
+
+.userLink {
+    border-bottom: 2px solid var(--orange);
+    display: flex;
+    justify-content: space-around;
+}

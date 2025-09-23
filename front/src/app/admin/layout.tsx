@@ -21,21 +21,16 @@ export default function AdminLayout({children}: {children: React.ReactNode}) {
 
         if(!user) {
             router.replace("/users/login")
-            return
-        }
-
-        if(!user.is_admin) {
+        } else if(!user.is_admin) {
             router.replace("/users/products")
-            return
         }
 
-        // if(user.role === "Boss") {
-        //     router.push("/admin/users")
-        //     return
-        // } else if (user.role === "Editor") {
-        //     router.replace("/admin/products")
-        // }
     }, [user, router, loading])
+
+    if(loading || !user || !user.is_admin) {
+        return null
+    }
+    
     return (
         <div className="max-w-7xl text-xl text-black-500">
             {children}

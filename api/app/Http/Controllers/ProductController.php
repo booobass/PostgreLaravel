@@ -96,7 +96,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
-        return response()->json(['product' => $product]);
+        return response()->json(['product' => $product->load('categories')]);
     }
 
     /**

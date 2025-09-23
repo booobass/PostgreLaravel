@@ -2,6 +2,8 @@
 
 import { ReadCart } from "@/components/ReadCart";
 import api from "@/lib/axios";
+import btn from "@/styles/button.module.css";
+import styles from "@/styles/user_product.module.css";
 import { CartType } from "@/type/type";
 import Image from "next/image";
 import Link from "next/link";
@@ -47,24 +49,40 @@ const Cart = () => {
 
 
     return (
-        <div>
-            <h3>カート内容</h3>
-            {carts.map((cart :CartType) => (
-                <div key={cart.id}>
-                    <h3>{cart.product?.name}</h3>
-                    <Image
-                        src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${cart.product?.image}`}
-                        height={100}
-                        width={100}
-                        alt={cart.product?.name || ""}
-                        priority
-                    />
-                    <p>{cart.quantity}個</p>
-                    <button onClick={() => handleDelete(cart.id)}>カートから削除</button>
+        <div className="warapper">
+            <div className={`${styles.main}`}>
+                <div className={styles.title}>
+                    <h3>カート内容</h3>
                 </div>
-            ))}
-            <Link href={"../users/order/show"}>注文画面に進む</Link>
-            <Link href={"../users/products"}>戻る</Link>
+                <div className={`${styles.product} mt-8`}>
+                    {carts.map((cart :CartType) => (
+                        <div key={cart.id} className={`${styles.content}`}>
+                            <div className="flex justify-center mt-3">
+                                <Image
+                                    src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${cart.product?.image}`}
+                                    height={100}
+                                    width={100}
+                                    alt={cart.product?.name || ""}
+                                    priority
+                                    />
+                                <div className="content-center ml-6">
+                                    <p className="font-bold">{cart.product?.name}：¥{cart.product?.price}</p>
+                                    <p>{cart.quantity}個</p>
+                                </div>
+                            </div>
+                            <button
+                                onClick={() => handleDelete(cart.id)}
+                                className={`${btn.submitBtn} mt-6 ml-26 mb-6`}
+                            >カートから削除
+                            </button>
+                        </div>
+                    ))}
+                </div>
+                <div className={`${btn.userLink} mt-8 w-[280px]`}>
+                    <Link href={"../users/order/show"}>注文画面に進む</Link>
+                    <Link href={"../users/products"}>戻る</Link>
+                </div>
+            </div>
         </div>
     )
 }

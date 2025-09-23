@@ -3,6 +3,10 @@
 import { ReadCart } from "@/components/ReadCart"
 import api from "@/lib/axios"
 import { tax } from "@/lib/tax"
+import btn from "@/styles/button.module.css"
+import form from "@/styles/form.module.css"
+import styles from "@/styles/user_product.module.css"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import React, { useState } from "react"
 
@@ -39,27 +43,36 @@ const ShowOrder = () => {
     const totalPrice = Math.floor(subPrice * tax)
 
     return (
-        <div>
-            <h3>注文情報入力</h3>
-            <div>
-                <h3>小計</h3>
-                <div>
-                    <h4>商品：{totalQuantity}個</h4>
-                    <h4>税込：¥{totalPrice}</h4>
+        <div className="warapper">
+            <div className={`${styles.main}`}>
+                <div className={`${styles.title}`}>
+                    <h3>注文情報入力</h3>
+                </div>
+                <div className="flex mt-8">
+                    <h3 className="font-bold">小計</h3>
+                    <div className="ml-8">
+                        <h4>商品：{totalQuantity}個</h4>
+                        <h4>税込：¥{totalPrice}</h4>
+                    </div>
+                </div>
+                <form onSubmit={handleOrder} className="mt-6">
+                    <label className={form.label}>お支払い方法：
+                        <select
+                            name="payment"
+                            value={payment}
+                            onChange={(e) => setPayment(e.target.value as "credit" | "cash")}
+                            className={form.admin_input}>
+                            <option value="credit">クレジット</option>
+                            <option value="cash">現金</option>
+                        </select>
+                    </label>
+                    <button className={`${btn.submitBtn} mt-8 ml-28`}>注文する</button>
+                </form>
+                <div className={`${btn.userLink} mt-8 w-[280px]`}>
+                    <Link href={"/users/products"}>商品一覧</Link>
+                    <Link href={"/users/cart"}>カート内容</Link>
                 </div>
             </div>
-            <form onSubmit={handleOrder}>
-                <label>お支払い方法：
-                    <select
-                        name="payment"
-                        value={payment}
-                        onChange={(e) => setPayment(e.target.value as "credit" | "cash")}>
-                        <option value="credit">クレジット</option>
-                        <option value="cash">現金</option>
-                    </select>
-                </label>
-                <button>注文する</button>
-            </form>
         </div>
     )
 }

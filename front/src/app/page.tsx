@@ -49,7 +49,9 @@ const Page = () => {
     <div className="warapper">
       <div>
           <h1 className={`${jose.className} text-5xl font-extrabold`}>L&apos;orto della Nonna</h1>
+          <div>
           <Card items={superlative} />
+          </div>
           <Card items={seasonal} />
           <Card items={special} />
           <Card items={newproduct} />
