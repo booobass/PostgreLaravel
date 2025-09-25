@@ -10,6 +10,14 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import React, { useState } from "react"
 
+type Props = {
+    name: string;
+    pivot: {
+        price: number;
+        quantity: number;
+    }
+}
+
 const ShowOrder = () => {
     const [payment, setPayment] = useState<"credit" | "cash">("credit")
     const router = useRouter()
@@ -28,9 +36,19 @@ const ShowOrder = () => {
                 }
             )
             alert("注文しました")
-            console.log(response.data.order)
-            router.push("../../users/thanks/show")
-
+            console.log("respone", response.data.order)
+            const order = response.data.order
+            const thanksData = {
+                products: order.products.map((p: Props) => ({
+                    name: p.name,
+                    price: p.pivot.price,
+                    quantity: p.pivot.quantity
+                    })),
+                payment: payment,
+                total: totalPrice
+            }
+            const query = JSON.stringify(thanksData)
+            router.push(`/users/thanks/show?data=${query}`)
         } catch {
             alert("注文出来ません")
         }

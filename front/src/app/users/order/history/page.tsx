@@ -1,5 +1,6 @@
 "use client"
 
+import LogoutButton from "@/components/LogoutButton"
 import api from "@/lib/axios"
 import btn from "@/styles/button.module.css"
 import tb from "@/styles/table.module.css"
@@ -47,7 +48,7 @@ const OrderHistory = () => {
                         {orders.map((o) => (
                             <Fragment key={o.id}>
                                 {o.products.map((p, index) => (
-                                    <tr key={p.id}>
+                                    <tr key={p.id} className="border-b text-center">
                                         {index === 0 && (
                                             <>
                                                 <td rowSpan={o.products.length}>
@@ -65,7 +66,7 @@ const OrderHistory = () => {
                                         <td>¥{p.pivot.price}</td>
                                         {index === 0 && (
                                             <>
-                                                <td rowSpan={o.products.length}>¥{o.total}</td>
+                                                <td rowSpan={o.products.length }>¥{o.total}</td>
                                                 <td rowSpan={o.products.length}>{o.status_label}</td>
                                             </>
                                         )}
@@ -79,6 +80,7 @@ const OrderHistory = () => {
             <div className={`${btn.submitBtn} mt-8 w-[180px] text-center`}>
                 <Link href={"/users/products"}>商品購入画面</Link>
             </div>
+            <LogoutButton />
         </div>
     )
 
