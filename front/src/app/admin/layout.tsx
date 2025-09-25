@@ -1,5 +1,6 @@
 "use client"
 
+import LogoutButton from "@/components/LogoutButton";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -32,8 +33,9 @@ export default function AdminLayout({children}: {children: React.ReactNode}) {
     }
     
     return (
-        <div className="max-w-7xl text-xl text-black-500">
+        <div className="w-[1200px] max-w-7xl text-xl text-black-500">
             {children}
+            <LogoutButton />
         </div>
     )
 }

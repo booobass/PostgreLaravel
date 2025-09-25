@@ -1,4 +1,5 @@
 "use client"
+import LogoutButton from "@/components/LogoutButton"
 import { ReadProduct } from "@/components/ReadProduct"
 import Search from "@/components/Search"
 import api from "@/lib/axios"
@@ -23,7 +24,6 @@ const Products = () => {
 
     const [error, setError] = useState<{ [key: number]: string | null}>({})
 
-    console.log("QQ",quantity)
     console.log("PP", params)
 
     const handleCart = async (e: React.FormEvent<HTMLFormElement>, product_id: number) => {
@@ -50,6 +50,8 @@ const Products = () => {
             }
         }
     }
+    console.log("QQ",quantity)
+
 
 
     return (
@@ -88,16 +90,20 @@ const Products = () => {
                             </div>
                             <form onSubmit={(e) => handleCart(e, product.id)}>
                                 <input type="hidden" name="product_id" value={product.id} />
-                                <label className={form.label}>個数：
-                                    <input
-                                        type="number"
-                                        name="quantity"
-                                        value={quantity[product.id] || ""}
-                                        onChange={(e) => setQuantity({...quantity, [product.id]: e.target.value})}
-                                        className={form.admin_input} />
-                                </label>
+                                {
+                                    product.stock > 0 ? (
+                                        <label className={form.label}>個数：
+                                            <input
+                                                type="number"
+                                                name="quantity"
+                                                value={quantity[product.id] || ""}
+                                                onChange={(e) => setQuantity({...quantity, [product.id]: e.target.value})}
+                                                className={form.admin_input} />
+                                        </label>
+                                    ) : <p className="p-1 font-bold">※売り切れました</p>
+                                }
                                 <button
-                                    disabled={product.stock ? false : true}
+                                    disabled={product.stock <= 0}
                                     className={`${btn.submitBtn} mt-6 ml-26 mb-6`}
                                 >カートに入れる
                                 </button>
@@ -109,6 +115,7 @@ const Products = () => {
                     ))}
                 </div>
             </div>
+            <LogoutButton />
         </div>
     )
 }

@@ -1,10 +1,30 @@
 "use client"
 
+import LogoutButton from "@/components/LogoutButton"
 import btn from "@/styles/button.module.css"
 import styles from "@/styles/user_product.module.css"
 import Link from "next/link"
+import { notFound, useSearchParams } from "next/navigation"
+
+type Props = {
+    name: string;
+    price: number;
+    quantity: number;  
+}
 
 const ThanksUser = () => {
+
+    const params = useSearchParams()
+    const data = params.get("data")
+
+    if(!data) {
+        notFound()
+    }
+
+    const thanksData = JSON.parse(data)
+
+    console.log(thanksData)
+
     return (
         <div className="warapper">
             <div className={`${styles.main}`}>
@@ -14,11 +34,30 @@ const ThanksUser = () => {
                 <div className="mt-8 font-bold">
                     <p>ご購入ありがとうございました</p>
                 </div>
-                <div className={`${btn.userLink} mt-8 w-[280px]`}>
+                <div className="mt-6">
+                    <div className={`${styles.border_s} w-[180px]`}>
+                        <h3 className={`font-bold`}>購入内容</h3>
+                    </div>
+                    <div className={`${styles.border} mt-5 text-right`}>
+                        {thanksData.products.map((p: Props, i: number) => (
+                            <div key={i}>
+                                {i === 0 ? (
+                                    <p><span className="font-bold">商品</span>：{p.name} ¥{p.price} {p.quantity}個</p>
+                                ) : (
+                                    <p>{p.name} ¥{p.price} {p.quantity}個</p>
+                                )}
+                            </div>
+                        ))}
+                        <p className="mt-3"><span className="font-bold">合計</span>（税込）：¥{thanksData.total}</p>
+                        <p><span className="font-bold">お支払い方法</span>：{thanksData.payment === "cash" ? "現金" : "クレジット"}</p>
+                    </div>
+                </div>
+                <div className={`${btn.userLink} mt-10 w-[280px]`}>
                     <Link href={"/users/products"}>商品一覧</Link>
                     <Link href={"/users/order/history"}>購入履歴</Link>
                 </div>
             </div>
+            <LogoutButton />
         </div>
         
     )

@@ -53,7 +53,7 @@ class OrderController extends Controller
 
         $order = $this->orderService->createOrder(Auth::user(), $validated);
 
-        response()->json(['order' => $order]);
+        return response()->json(['order' => $order->load('products')]);
     }
 
     /**

@@ -27,6 +27,22 @@
     background-origin: border-box;
 }
 
+.border {
+    padding: 8px 12px;
+    border: 2px solid transparent;
+    border-radius: 3px;
+    background:
+        linear-gradient(to right, #fff 30%, var(--orange) 100%) bottom / 100% 2px no-repeat, /*幅、高さ、繰り返し*/
+        linear-gradient(to bottom, #fff 30%, var(--orange) 100%) right / 2px 100% no-repeat;
+    background-origin: border-box;
+}
+
+.border_s {
+    width: 80px;
+    text-align: center;
+    border-bottom: 1px solid var(--orange);
+}
+
 .category {
     display: inline-block;
     border: 2px solid var(--orange);
