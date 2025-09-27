@@ -41,7 +41,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/order/{order}', [OrderController::class, 'destroy']);
     Route::patch('/order/{order}/status', [OrderController::class, 'updateStatus']);
     Route::get('/order/user', [OrderController::class, 'userOrders']);
+    Route::get('/user', [AuthenticatedSessionController::class, 'index']);
 });
 
+Route::get('/product/customer', [ProductController::class, 'customer']);
 Route::get('/product/{product}', [ProductController::class, 'show']);
-Route::get('/user', [AuthenticatedSessionController::class, 'index']);

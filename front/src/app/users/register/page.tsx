@@ -1,5 +1,6 @@
 "use client"
 
+import { zen } from "@/fonts/fonts"
 import api from "@/lib/axios"
 import btn from "@/styles/button.module.css"
 import styles from "@/styles/form.module.css"
@@ -44,10 +45,10 @@ const Register = () => {
 
     return (
         <div className="warapper">
-            <div className={styles.main}>
+            <div className={`${styles.main} ${zen.className}`}>
                 <h2 className="text-2xl font-bold">ユーザー登録ページ</h2>
                 <form onSubmit={handleSubmit} className={styles.form}>
-                    <label className={styles.label}>ユーザー名：
+                    <label className={`${styles.label} font-[500]`}>ユーザー名：
                         <input
                             type="text"
                             name="name"
@@ -56,7 +57,7 @@ const Register = () => {
                             required
                             className={styles.input} />
                     </label>
-                    <label className={`${styles.label} mt-3`}>メールアドレス：
+                    <label className={`${styles.label} font-[500] mt-3`}>メールアドレス：
                         <input
                             type="text"
                             name="email"
@@ -65,7 +66,7 @@ const Register = () => {
                             required
                             className={styles.input} />
                     </label>
-                    <label className={`${styles.label} mt-3`}>パスワード：
+                    <label className={`${styles.label} font-[500] mt-3`}>パスワード：
                         <input
                             type="text"
                             name="password"

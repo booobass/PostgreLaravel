@@ -21,7 +21,7 @@ export default function AdminLayout({children}: {children: React.ReactNode}) {
         console.log("layout", user)
 
         if(!user) {
-            router.replace("/users/login")
+            router.replace("/")
         } else if(!user.is_admin) {
             router.replace("/users/products")
         }

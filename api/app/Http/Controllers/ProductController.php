@@ -13,6 +13,13 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function customer()
+    {
+        $products = Product::with('categories')->get();
+
+        return response()->json(['products' => $products]);
+    }
+
     public function index(Request $request)
     {
         $query = Product::with('categories');

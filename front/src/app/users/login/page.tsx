@@ -1,6 +1,7 @@
 "use client"
 
 import { useAuth } from "@/context/AuthContext"
+import { zen } from "@/fonts/fonts"
 import api from "@/lib/axios"
 import btn from "@/styles/button.module.css"
 import styles from "@/styles/form.module.css"
@@ -54,10 +55,10 @@ const Login = () => {
 
     return (
         <div className="warapper">
-            <div className={styles.main}>
+            <div className={`${styles.main} ${zen.className}`}>
                 <h2 className="text-2xl font-bold">ログインページ</h2>
                 <form onSubmit={handleSubmit} className={styles.form}>
-                    <label>メールアドレス：
+                    <label className={`${styles.label} font-[500]`}>メールアドレス：
                         <input
                             type="text"
                             name="email"
@@ -66,7 +67,7 @@ const Login = () => {
                             required
                             className={styles.input} />
                     </label>
-                    <label className={`${styles.label} mt-3`}>パスワード：
+                    <label className={`${styles.label} font-[500] mt-3`}>パスワード：
                         <input
                             type="text"
                             name="password"

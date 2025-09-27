@@ -1,15 +1,17 @@
 "use client"
 
 import Card from "@/components/Card"
-import { ReadProduct } from "@/components/ReadProduct"
-import { jose } from "@/fonts/fonts"
+import { CustomerProduct } from "@/components/ReadProduct"
+import { jose, zen } from "@/fonts/fonts"
+import border from "@/styles/border.module.css"
 import { Category, Product } from "@/type/type"
 import Link from "next/link"
 import './globals.css'
 
 const Page = () => {
-  const {products} = ReadProduct()
-  console.log(products)
+
+  const {customerProduct} = CustomerProduct()
+  console.log("cp", customerProduct)
 
   // const specials = products.filter((p: Product) => (
   //   p.categories?.some((c: Category) => c.name === "特売"))
@@ -28,7 +30,7 @@ const Page = () => {
   const seasonal: Product[] = []
   const newproduct: Product[] = []
 
-  products.forEach((p: Product) => {
+  customerProduct.forEach((p: Product) => {
     const categoryNames = p.categories?.map((c: Category) => c.name) || []
 
     if (categoryNames.includes("特売") && categoryNames.includes("旬")) {
@@ -48,7 +50,7 @@ const Page = () => {
   return (
     <div className="warapper">
       <div>
-          <h1 className={`${jose.className} text-5xl font-extrabold`}>L&apos;orto della Nonna</h1>
+          <h1 className={`${jose.className} ${border.solid_l} text-5xl font-extrabold`}>L&apos;orto della Nonna</h1>
           <div>
           <Card items={superlative} />
           </div>
@@ -56,15 +58,10 @@ const Page = () => {
           <Card items={special} />
           <Card items={newproduct} />
       </div>
-      <footer className="display: flex">
-        <p className="bg-[#eebbcd]">
-          お時間ありましたら<br />
-          ごゆっくりどうぞ
-        </p>
-        <div className="bg-[#e8d3d1]">
+      <footer className={`mt-16 w-[800px]`}>
+        <div className={`${zen.className} ${border.solid_s} flex justify-evenly font-[500]`}>
+          <p>お時間ありましたらごゆっくりどうぞ</p>
           <Link href={"./users/login"}>ログイン</Link>
-        </div>
-        <div className="bg-[#a8bf93]">
           <Link href={"./users/register"}>ユーザー登録</Link>
         </div>
       </footer>
