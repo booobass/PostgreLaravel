@@ -11,13 +11,12 @@
 
 .main h2 {
     display: inline-block;
-    border: 1px solid #666;
+    border: 2px dashed var(--orange);
     font-weight: bold;
     font-size: 20px;
     border-radius: 6px;
     padding: 4px 8px;
     transform: rotate(-8deg);
-    background-color: var(--orange);
 }
 
 .content {

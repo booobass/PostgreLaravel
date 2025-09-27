@@ -1,0 +1,11 @@
+.solid_s {
+    border-bottom: 1px solid var(--orange);
+}
+
+.solid_m {
+    border-bottom: 2px solid var(--orange);
+}
+
+.solid_l {
+    border-bottom: 3px solid var(--orange);
+}

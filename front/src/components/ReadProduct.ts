@@ -72,3 +72,25 @@ export const ReadProduct = (params: Props = {}) => {
     return {products, lastPage, loading, fetchProducts}
 
 }
+
+export const CustomerProduct = () => {
+
+    const [customerProduct, setCustomerProduct] = useState<Product[]>([])
+
+    const fetchCustomerProduct = useCallback(async () => {
+        try {
+            const response = await api.get("/api/product/customer")
+            console.log("customer", response.data.products)
+            setCustomerProduct(response.data.products)
+        } catch {
+            alert("商品取得できません")
+        }
+    }, [])
+
+    useEffect(() => {
+        fetchCustomerProduct()
+    }, [fetchCustomerProduct])
+
+    return {customerProduct}
+
+}
