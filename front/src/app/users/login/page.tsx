@@ -6,6 +6,7 @@ import api from "@/lib/axios"
 import btn from "@/styles/button.module.css"
 import styles from "@/styles/form.module.css"
 import { User } from "@/type/type"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
@@ -78,6 +79,9 @@ const Login = () => {
                     </label>
                     <button className={`${btn.submitBtn} mt-6 ml-38`}>ログイン</button>
                 </form>
+                <div className="mt-6 ml-30">
+                    <Link href={"/"}>トップページに戻る</Link>
+                </div>
             </div>
         </div>
     )

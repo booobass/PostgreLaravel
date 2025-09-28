@@ -23,20 +23,22 @@ const AdminShow = () => {
                 <div>
                     {products.map((product: Product) => (
                         <div key={product.id} className={`${styles.product} mt-6`}>
-                            <div>
+                            <div className="relative w-[100px] h-[90px]">
                                 <Image
                                     src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${product.image}`}
-                                    height={100}
-                                    width={100}
+                                    // height={100}
+                                    // width={100}
                                     alt={product.name}
-                                    priority
+                                    fill
+                                    sizes="100px"
+                                    className="object-cover object-center rounded-md"
                                 />
                             </div>
-                            <div className="w-[250px] ml-6 text-center">
+                            <div className="w-[250px] ml-6 text-center content-center">
                                 <p>{product.name}{"  "}¥{product.price}：{product.stock}個</p>
                                 <p>{product.categories?.map(category => category.name).join("、")}</p>
                             </div>
-                            <div>
+                            <div className="content-center">
                                 <p className="w-[200px] ml-6 text-base">{product.description}</p>
                             </div>
                             <div className="w-[120px] items-center flex justify-around">

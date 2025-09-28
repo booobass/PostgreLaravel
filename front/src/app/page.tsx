@@ -49,22 +49,24 @@ const Page = () => {
   // console.log("Special", specials)
   return (
     <div className="warapper">
-      <div>
-          <h1 className={`${jose.className} ${border.solid_l} text-5xl font-extrabold`}>L&apos;orto della Nonna</h1>
+      <div className="w-[1000px] justify-items-center">
           <div>
-          <Card items={superlative} />
+            <h1 className={`${jose.className} ${border.solid_l} text-5xl font-extrabold`}>L&apos;orto della Nonna</h1>
           </div>
-          <Card items={seasonal} />
-          <Card items={special} />
-          <Card items={newproduct} />
+          <div className="grid grid-cols-2 gap-1">
+            <Card items={superlative} />
+            <Card items={seasonal} />
+            <Card items={special} />
+            <Card items={newproduct} />
+          </div>
+        <footer className={`mt-16 w-[800px]`}>
+          <div className={`${zen.className} ${border.solid_s} flex justify-evenly font-[500]`}>
+            <p>自家栽培のお野菜をどうぞ</p>
+            <Link href={"./users/login"}>ログイン</Link>
+            <Link href={"./users/register"}>ユーザー登録</Link>
+          </div>
+        </footer>
       </div>
-      <footer className={`mt-16 w-[800px]`}>
-        <div className={`${zen.className} ${border.solid_s} flex justify-evenly font-[500]`}>
-          <p>お時間ありましたらごゆっくりどうぞ</p>
-          <Link href={"./users/login"}>ログイン</Link>
-          <Link href={"./users/register"}>ユーザー登録</Link>
-        </div>
-      </footer>
     </div>
   )
 }
