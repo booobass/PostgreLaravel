@@ -9,3 +9,7 @@
 .solid_l {
     border-bottom: 3px solid var(--orange);
 }
+
+.dashed_s {
+    border-bottom: 1px dashed var(--orange);
+}

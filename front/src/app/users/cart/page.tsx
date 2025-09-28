@@ -54,32 +54,44 @@ const Cart = () => {
                 <div className={styles.title}>
                     <h3>カート内容</h3>
                 </div>
-                <div className={`${styles.product} mt-8`}>
-                    {carts.map((cart :CartType) => (
-                        <div key={cart.id} className={`${styles.content}`}>
-                            <div className="flex justify-center mt-3">
-                                <Image
-                                    src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${cart.product?.image}`}
-                                    height={100}
-                                    width={100}
-                                    alt={cart.product?.name || ""}
-                                    priority
-                                    />
-                                <div className="content-center ml-6">
-                                    <p className="font-bold">{cart.product?.name}：¥{cart.product?.price}</p>
-                                    <p>{cart.quantity}個</p>
+                {carts.length !== 0 ? (
+                    <div className={`${styles.product} mt-8`}>
+                        {carts.map((cart :CartType) => (
+                            <div key={cart.id} className={`${styles.content}`}>
+                                <div className="flex justify-center mt-3">
+                                    <div className="relative w-[100px] h-[90px]">
+                                        <Image
+                                            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${cart.product?.image}`}
+                                            alt={cart.product?.name || ""}
+                                            priority
+                                            fill
+                                            sizes="100px"
+                                            className="object-cover object-center rounded-sm"
+                                            />
+                                    </div>
+                                    <div className="content-center ml-6">
+                                        <p className="font-bold">{cart.product?.name}：¥{cart.product?.price}</p>
+                                        <p>{cart.quantity}個</p>
+                                    </div>
                                 </div>
+                                <button
+                                    onClick={() => handleDelete(cart.id)}
+                                    className={`${btn.submitBtn} mt-6 ml-26 mb-6`}
+                                >カートから削除
+                                </button>
                             </div>
-                            <button
-                                onClick={() => handleDelete(cart.id)}
-                                className={`${btn.submitBtn} mt-6 ml-26 mb-6`}
-                            >カートから削除
-                            </button>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                ) : (
+                    <p className="mt-8 font-bold">カートは空です</p>
+                )}
                 <div className={`${btn.userLink} mt-8 w-[280px]`}>
-                    <Link href={"../users/order/show"}>注文画面に進む</Link>
+                    <Link
+                        href={"../users/order/show"}
+                        className={`${carts.length === 0 ? "pointer-events-none" : ""}`}
+                    >
+                        注文画面に進む
+                    </Link>
                     <Link href={"../users/products"}>戻る</Link>
                 </div>
             </div>

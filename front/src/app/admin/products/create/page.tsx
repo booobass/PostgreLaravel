@@ -6,10 +6,13 @@ import btn from "@/styles/button.module.css"
 import styles from "@/styles/form.module.css"
 import { Category } from "@/type/type"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useCallback, useState } from "react"
 import { useDropzone } from "react-dropzone"
 
 const AdminProducts = () => {
+
+    const router = useRouter()
 
     const [product, setProduct] = useState({
         name: "",
@@ -92,6 +95,7 @@ const AdminProducts = () => {
                 }
             )
             alert("商品を登録しました")
+            router.push("/admin/products/show")
         } catch {
             alert("商品登録に失敗しました")
         }
@@ -115,7 +119,7 @@ const AdminProducts = () => {
                     </label>
                     <label className={`${styles.label} mt-3`}>値段：
                         <input
-                            type="text"
+                            type="number"
                             name="price"
                             value={product.price}
                             onChange={handleChange}

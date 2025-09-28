@@ -151,11 +151,15 @@ const AdminUpdate = () => {
                     <div className="mt-3">
                         <p>現在の写真</p>
                         {typeof products.image === "string" && products.image && (
-                            <Image
-                                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${products.image}`}
-                                height={50}
-                                width={50}
-                                alt={`${products.name}`}/>
+                            <div className="relative w-[90px] h-[80px]">
+                                <Image
+                                    src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${products.image}`}
+                                    alt={`${products.name}`}
+                                    fill
+                                    sizes="90px"
+                                    className="object-cover object-center rounded-sm"
+                                />                                   
+                            </div>
                         )}
                     </div>
                     <label className={`${styles.label} mt-3`}>写真変更

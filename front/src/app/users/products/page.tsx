@@ -51,6 +51,7 @@ const Products = () => {
         }
     }
     console.log("QQ",quantity)
+    console.log("categ", products)
 
 
 
@@ -70,15 +71,26 @@ const Products = () => {
                     {products.map((product :Product) => (
                         <div key={product.id} className={`${styles.content}`}>
                             <div>
-                                <p className={`${styles.category}`}>{product.categories?.map(category => category.name).join(", ")}</p>
+                                {product.categories?.length !== 0 ? (
+                                    <p className={`${styles.category}`}>
+                                        {product.categories?.map(category => category.name).join(", ")}
+                                    </p>
+                                ) : (
+                                    <p></p>
+                                )}
+                                {/* <p className={`${styles.category}`}>
+                                    {product.categories ? product.categories.map(category => category.name).join(", ") : null}
+                                </p> */}
                                 <div className="flex mt-3 justify-center">
-                                    <Image
-                                        src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${product.image}`}
-                                        height={100}
-                                        width={100}
-                                        alt={product.name}
-                                        priority
-                                        />
+                                    <div className="relative w-[100px] h-[90px]">
+                                        <Image
+                                            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${product.image}`}
+                                            alt={product.name}
+                                            fill
+                                            sizes="100px"
+                                            className="object-cover object-center rounded-sm"
+                                            />
+                                    </div>
                                     <div className="ml-6 content-center">
                                         <p className="font-bold">{product.name}：¥{product.price}</p>
                                         <p>在庫：{product.stock}個</p>
