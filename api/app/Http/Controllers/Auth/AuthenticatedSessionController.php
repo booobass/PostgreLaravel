@@ -17,13 +17,17 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): JsonResponse
     {
+
         $request->authenticate();
 
+        /** @var \App\Models\User $user */
         $user = Auth::user();
+
 
         $admin = Admin::where('user_id', $user->id)->first();
 
         $token = $user->createToken('authToken')->plainTextToken;
+
 
         return response()->json([
             'user' => [
