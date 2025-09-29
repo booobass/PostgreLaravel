@@ -4,44 +4,57 @@ namespace Tests\Feature\Auth;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
-class AuthenticationTest extends TestCase
-{
-    use RefreshDatabase;
+uses(TestCase::class, RefreshDatabase::class);
 
-    public function test_users_can_authenticate_using_the_login_screen(): void
-    {
-        $user = User::factory()->create();
+it('can login and return token', function () {
 
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'password',
+    $user = User::factory()->create([
+        'password' => bcrypt('password')
+    ]);
+
+    $response = $this->postJson('/api/login', [
+        'email' => $user->email,
+        'password' => 'password'
+    ]);
+
+    $response->assertStatus(200)
+        ->assertJsonStructure([
+            'user' => ['id', 'name', 'email', 'is_admin', 'role'],
+            'token'
         ]);
 
-        $this->assertAuthenticated();
-        $response->assertNoContent();
-    }
+    $this->assertAuthenticatedAs($user);
 
-    public function test_users_can_not_authenticate_with_invalid_password(): void
-    {
-        $user = User::factory()->create();
+});
 
-        $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'wrong-password',
-        ]);
+it('cannot login with invalid credentials', function () {
 
-        $this->assertGuest();
-    }
+    $user = User::factory()->create([
+        'password' => bcrypt('password')
+    ]);
 
-    public function test_users_can_logout(): void
-    {
-        $user = User::factory()->create();
+    $response = $this->postJson('/api/login', [
+        'email' => $user->email,
+        'password' => 'wrong-password'
+    ]);
 
-        $response = $this->actingAs($user)->post('/logout');
+    $response->assertStatus(422);
+    $this->assertGuest();
+});
 
-        $this->assertGuest();
-        $response->assertNoContent();
-    }
-}
+it('can logout and revoke token', function () {
+
+    $user = User::factory()->create();
+    $token = $user->createToken('authToken')->plainTextToken;
+
+    $response = $this->withHeader('Authorization', 'Bearer ' . $token)->postJson('/api/logout');
+
+    $response->assertStatus(200)->assertJson(['message' => 'ログアウトしました']);
+
+    $this->assertDatabaseMissing('personal_access_tokens', [
+        'tokenable_id' => $user->id
+    ]);
+});
