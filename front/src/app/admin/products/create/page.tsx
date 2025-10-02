@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation"
 import { useCallback, useState } from "react"
 import { useDropzone } from "react-dropzone"
 
-const AdminProducts = () => {
+const CreateAdminProducts = () => {
 
     const router = useRouter()
 
@@ -173,4 +173,4 @@ const AdminProducts = () => {
     )
 }
 
-export default AdminProducts
+export default CreateAdminProducts

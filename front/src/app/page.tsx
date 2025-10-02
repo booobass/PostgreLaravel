@@ -62,8 +62,8 @@ const Page = () => {
         <footer className={`mt-16 w-[800px]`}>
           <div className={`${zen.className} ${border.solid_s} flex justify-evenly font-[500]`}>
             <p>自家栽培のお野菜をどうぞ</p>
-            <Link href={"./users/login"}>ログイン</Link>
-            <Link href={"./users/register"}>ユーザー登録</Link>
+            <Link href={"/users/login"}>ログイン</Link>
+            <Link href={"/users/register"}>ユーザー登録</Link>
           </div>
         </footer>
       </div>
