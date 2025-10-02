@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
-use App\Services\CartServices;
+use App\Service\CartService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +14,7 @@ class CartController extends Controller
      */
     protected $cartService;
 
-    public function __construct(CartServices $cartService)
+    public function __construct(CartService $cartService)
     {
         $this->cartService = $cartService;
     }

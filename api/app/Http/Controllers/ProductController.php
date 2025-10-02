@@ -76,10 +76,12 @@ class ProductController extends Controller
         ]);
 
         if($request->hasFile('image')) {
-            $original = request()->file('image')->getClientOriginalName();
-            $name = date('YmdHis') . '_' . $original;
-            request()->file('image')->move('storage/images', $name);
-            $validated['image'] = $name;
+            // $original = request()->file('image')->getClientOriginalName();
+            // $name = date('YmdHis') . '_' . $original;
+            // request()->file('image')->move('storage/images', $name);
+            // $validated['image'] = $name;
+            $path = $request->file('image')->store('images', 'public');
+            $validated['image'] = basename($path);
         }
 
         $categories = $validated['categories'] ?? [];
@@ -135,10 +137,8 @@ class ProductController extends Controller
             if($product->image) {
                 Storage::disk('public')->delete('images/' . $product->image);
             }
-            $original = request()->file('image')->getClientOriginalName();
-            $name = date('YmdHis') . '_' . $original;
-            request()->file('image')->move('storage/images', $name);
-            $validated['image'] = $name;
+            $path = $request->file('image')->store('images', 'public');
+            $validated['image'] = basename($path);
         }
 
         $categories = $validated['categories'] ?? [];
