@@ -52,8 +52,9 @@ describe("AuthProvider", () => {
                 <TestComponent />
             </AuthProvider>
         )
+        const user = userEvent.setup()
 
-        await userEvent.click(screen.getByText("Login"))
+        await user.click(screen.getByText("Login"))
 
         expect(screen.getByTestId("user")).toHaveTextContent("Admin")
         expect(screen.getByTestId("token")).toHaveTextContent("abc123")
@@ -67,9 +68,10 @@ describe("AuthProvider", () => {
                 <TestComponent />
             </AuthProvider>
         )
+        const user = userEvent.setup()
 
-        await userEvent.click(screen.getByText("Login"))
-        await userEvent.click(screen.getByText("Logout"))
+        await user.click(screen.getByText("Login"))
+        await user.click(screen.getByText("Logout"))
 
         expect(screen.getByTestId("user")).toHaveTextContent("null")
         expect(screen.getByTestId("token")).toHaveTextContent("null")
