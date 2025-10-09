@@ -19,7 +19,7 @@ const Card = ({items} :{items: Product[]}) => {
                         {items.map((s: Product) => (
                             <div key={s.id}>
                                 <div className="justify-items-center">
-                                    <div className="relative w-[100px] h-[90px]">
+                                    <div className="relative max-w-[100px] w-full h-[90px]">
                                         <Image
                                             src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${s.image}`}
                                             alt={s.name}
@@ -29,7 +29,7 @@ const Card = ({items} :{items: Product[]}) => {
                                             className="object-cover object-center rounded-sm"
                                         />
                                     </div>
-                                    <div className="flex font-[700] text-xl">
+                                    <div className="md:flex font-[700] text-xl">
                                         <h3>{s.name}：</h3>
                                         <p>¥{s.price}</p>
                                     </div>
