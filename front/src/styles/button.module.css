@@ -45,3 +45,9 @@
     margin-top: 18px;
     margin-left: 540px;
 }
+
+@media (max-width:390px) {
+    .logout {
+        margin-left: 120px;
+    }
+}

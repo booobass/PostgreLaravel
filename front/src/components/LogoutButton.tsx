@@ -30,7 +30,7 @@ const LogoutButton = () => {
     }
 
     return (
-        <div className="warapper w-[800px]">
+        <div className="warapper max-w-[800px] w-full">
             <button onClick={handleDelete} className={btn.logout}>ログアウト</button>
         </div>
     )

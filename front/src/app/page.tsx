@@ -49,18 +49,18 @@ const Page = () => {
   // console.log("Special", specials)
   return (
     <div className="warapper">
-      <div className="w-[1000px] justify-items-center">
+      <div className="max-w-[1000px] w-full justify-items-center">
           <div>
             <h1 className={`${jose.className} ${border.solid_l} text-5xl font-extrabold`}>L&apos;orto della Nonna</h1>
           </div>
-          <div className="grid grid-cols-2 gap-1">
+          <div className="grid grid-cols-2 gap-1 max-sm:grid-cols-1">
             <Card items={superlative} />
             <Card items={seasonal} />
             <Card items={special} />
             <Card items={newproduct} />
           </div>
-        <footer className={`mt-16 w-[800px]`}>
-          <div className={`${zen.className} ${border.solid_s} flex justify-evenly font-[500]`}>
+        <footer className={`mt-16 max-w-[800px] w-full`}>
+          <div className={`${zen.className} ${border.solid_s} flex justify-evenly font-[500] max-sm:flex-col max-sm:items-center max-sm:gap-2`}>
             <p>自家栽培のお野菜をどうぞ</p>
             <Link href={"/users/login"}>ログイン</Link>
             <Link href={"/users/register"}>ユーザー登録</Link>
