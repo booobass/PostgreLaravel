@@ -42,9 +42,9 @@ const ThanksUser = () => {
                         {thanksData.products.map((p: Props, i: number) => (
                             <div key={i}>
                                 {i === 0 ? (
-                                    <p><span className="font-bold">商品</span>：{p.name} ¥{p.price} {p.quantity}個</p>
+                                    <p><span className="font-bold">商品</span>：{p.name}（¥{p.price}）：{p.quantity}個</p>
                                 ) : (
-                                    <p>{p.name} ¥{p.price} {p.quantity}個</p>
+                                    <p>{p.name}（¥{p.price}）：{p.quantity}個</p>
                                 )}
                             </div>
                         ))}

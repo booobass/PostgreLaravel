@@ -46,8 +46,8 @@
     margin-left: 540px;
 }
 
-@media (max-width:390px) {
+@media (max-width:430px) {
     .logout {
-        margin-left: 120px;
+        margin-left: 170px;
     }
 }

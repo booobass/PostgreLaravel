@@ -58,7 +58,7 @@ const ShowOrder = () => {
                 {order.length !== 0 ? (
                     <table className="mt-4">
                         <thead>
-                            <tr>
+                            <tr className="text-left">
                                 <th>名前</th>
                                 <th>Email</th>
                                 <th>商品名</th>
@@ -83,7 +83,7 @@ const ShowOrder = () => {
                                             </>
                                         )}
                                         <td>{p.name}</td>
-                                        <td>{p.pivot.quantity}</td>
+                                        <td>{p.pivot.quantity}個</td>
                                         <td>¥{p.pivot.price}</td>
                                         {index === 0 && (
                                             <>

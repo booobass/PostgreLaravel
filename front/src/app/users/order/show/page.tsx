@@ -3,9 +3,11 @@
 import { ReadCart } from "@/components/ReadCart"
 import api from "@/lib/axios"
 import { tax } from "@/lib/tax"
+import border from "@/styles/border.module.css"
 import btn from "@/styles/button.module.css"
 import form from "@/styles/form.module.css"
 import styles from "@/styles/user_product.module.css"
+import { CartType } from "@/type/type"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import React, { useState } from "react"
@@ -56,6 +58,8 @@ const ShowOrder = () => {
 
     const { carts} =  ReadCart()
 
+    console.log("ordercart", carts)
+
     const totalQuantity = carts.reduce((sum: number, cart: { quantity: number }) => sum + cart.quantity, 0);
     const subPrice = carts.reduce((sum: number, cart: { product: { price: number }, quantity: number }) => sum + (cart.product.price * cart.quantity), 0);
     const totalPrice = Math.floor(subPrice * tax)
@@ -65,6 +69,16 @@ const ShowOrder = () => {
             <div className={`${styles.main}`}>
                 <div className={`${styles.title}`}>
                     <h3>注文情報入力</h3>
+                </div>
+                <div className="mt-6">
+                    <h3 className="font-bold">購入内容</h3>
+                    <div className={`${border.dashed_l} mt-3 pb-2`}>
+                        {carts?.map((c: CartType) => (
+                            <div key={c.id}>
+                                <p>{c.product?.name}（¥{c.product?.price}）：{c.quantity}個</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 <div className="flex mt-8">
                     <h3 className="font-bold">小計</h3>
