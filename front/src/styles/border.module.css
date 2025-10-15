@@ -13,3 +13,7 @@
 .dashed_s {
     border-bottom: 1px dashed var(--orange);
 }
+
+.dashed_l {
+    border-bottom: 3px dashed var(--orange);
+}

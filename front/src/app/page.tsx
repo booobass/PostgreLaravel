@@ -51,7 +51,7 @@ const Page = () => {
     <div className="warapper">
       <div className="max-w-[1000px] w-full justify-items-center">
           <div>
-            <h1 className={`${jose.className} ${border.solid_l} text-5xl font-extrabold`}>L&apos;orto della Nonna</h1>
+            <h1 className={`${jose.className} ${border.solid_l} text-5xl font-extrabold max-sm:text-4xl max-sm:font-bold`}>L&apos;orto della Nonna</h1>
           </div>
           <div className="grid grid-cols-2 gap-1 max-sm:grid-cols-1">
             <Card items={superlative} />

@@ -45,11 +45,12 @@ const AdminUser = () => {
                     role: info.role === "" ? null : info.role
                 }, {
                 headers: { "Authorization": `Bearer ${localStorage.getItem("token")}`}
-            })
-            alert("登録しました")
+                },
+            )
+            alert("更新しました")
             fetchUsers()
         } catch {
-            alert("更新できません")
+            alert("権限がありません")
         }
     }
 
@@ -57,10 +58,10 @@ const AdminUser = () => {
     return (
         <div className="warapper">
             <div className={`${tb.main} w-2xl`}>
-                <h3 className="text-xl font-bold">登録者の権限</h3>
+                <h3 className="text-xl font-bold">ユーザー管理</h3>
                 <table className={`mt-4`}>
                     <thead>
-                        <tr>
+                        <tr className="text-left">
                             <th>名前</th>
                             <th>Email</th>
                             <th>権限</th>
@@ -74,18 +75,22 @@ const AdminUser = () => {
                                 <td>{u.email}</td>
                                 <td>{u.role ?? "User"}</td>
                                 <td>
-                                    <select
-                                        name="role"
-                                        onChange={(e) => handleChange(e, String(u.id))}
-                                        className={btn.adminBtn}
-                                    >
-                                        <option value="">User</option>
-                                        <option value="Boss">Boss</option>
-                                        <option value="Editor">Editor</option>
-                                    </select>
+                                    {u.role === "Boss" ? null : (
+                                        <select
+                                            name="role"
+                                            onChange={(e) => handleChange(e, String(u.id))}
+                                            className={btn.adminBtn}
+                                        >
+                                            <option value="">User</option>
+                                            <option value="Boss">Boss</option>
+                                            <option value="Editor">Editor</option>
+                                        </select>
+                                    )}
                                 </td>
                                 <td>
-                                    <button onClick={updateRole} className={btn.adminBtn}>更新</button>
+                                    {u.role === "Boss" ? null : (
+                                        <button onClick={updateRole} className={btn.adminBtn}>更新</button>
+                                    )}
                                 </td>
                             </tr>
                         ))}

@@ -5,15 +5,15 @@ import { zen } from "@/fonts/fonts"
 import api from "@/lib/axios"
 import btn from "@/styles/button.module.css"
 import styles from "@/styles/form.module.css"
-import { User } from "@/type/type"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 const Login = () => {
-    const [user, setUser] = useState<User>({
+    const [user, setUser] = useState({
         email: "",
         password: "",
+        password_confirmation: ""
     })
 
     const handleChange = (e :React.ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +34,7 @@ const Login = () => {
                 {
                     email: user.email,
                     password: user.password,
-                    password_confirmation: user.password
+                    password_confirmation: user.password_confirmation
                 }
             )
             const token = await response.data.token
@@ -50,7 +50,7 @@ const Login = () => {
                 router.push("../users/products")
             }
         } catch {
-            alert("ログイン出来ません")
+            alert("メールアドレス、またはパスワードが違います")
         }
     }
 
@@ -58,25 +58,39 @@ const Login = () => {
         <div className="warapper">
             <div className={`${styles.main} ${zen.className}`}>
                 <h2 className="text-2xl font-bold">ログインページ</h2>
-                <form onSubmit={handleSubmit} className={styles.form}>
-                    <label className={`${styles.label} font-[500]`}>メールアドレス：
-                        <input
-                            type="text"
-                            name="email"
-                            value={user.email}
-                            onChange={handleChange}
-                            required
-                            className={styles.input} />
-                    </label>
-                    <label className={`${styles.label} font-[500] mt-3`}>パスワード：
-                        <input
-                            type="text"
-                            name="password"
-                            value={user.password}
-                            onChange={handleChange}
-                            required
-                            className={`${styles.input}`} />
-                    </label>
+                <form onSubmit={handleSubmit} className={`${styles.form}`}>
+                    <div className="text-right">
+                        <label className={`${styles.label} font-[500]`}>メールアドレス：
+                            <input
+                                type="text"
+                                name="email"
+                                value={user.email}
+                                onChange={handleChange}
+                                required
+                                className={`${styles.input} max-sm:block`} />
+                        </label>
+                        <label className={`${styles.label} font-[500] mt-3`}>パスワード：
+                            <input
+                                type="text"
+                                name="password"
+                                value={user.password}
+                                onChange={handleChange}
+                                required
+                                className={`${styles.input} max-sm:block`} />
+                        </label>
+                        <label className={`${styles.label} font-[500] mt-3`}>パスワード確認：
+                            <input
+                                type="text"
+                                name="password_confirmation"
+                                value={user.password_confirmation}
+                                onChange={handleChange}
+                                required
+                                className={`${styles.input} max-sm:block`} />
+                        </label>
+                        {user.password === user.password_confirmation ? null : (
+                            <p>パスワードが一致しません</p>
+                        )}
+                    </div>
                     <button className={`${btn.submitBtn} mt-6 ml-38`}>ログイン</button>
                 </form>
                 <div className="mt-6 ml-30">

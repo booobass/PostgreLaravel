@@ -97,7 +97,7 @@ const CreateAdminProducts = () => {
             alert("商品を登録しました")
             router.push("/admin/products/show")
         } catch {
-            alert("商品登録に失敗しました")
+            alert("商品説明とカテゴリー以外は全て入力して下さい")
         }
     }
 

@@ -29,6 +29,11 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
+        if($user->admin->role !== "Boss") {
+            return response()->json(['message' => '権限がありません'], 403);
+        };
+
         $validated = $request->validate([
             'user_id' => 'required|exists:users,id',
             'role' => 'nullable|string|in:Boss,Editor',
@@ -44,7 +49,7 @@ class AdminController extends Controller
         } else {
             Admin::where('user_id', $validated['user_id'])->delete();;
         }
-        return response()->json(['message' => '権限を更新しました']);
+        return response()->json(['message' => '権限を更新しました'], 200);
     }
 
     /**
