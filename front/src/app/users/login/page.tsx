@@ -88,7 +88,7 @@ const Login = () => {
                                 className={`${styles.input} max-sm:block`} />
                         </label>
                         {user.password === user.password_confirmation ? null : (
-                            <p>パスワードが一致しません</p>
+                            <p className="text-sm text-red-800">パスワードが一致しません</p>
                         )}
                     </div>
                     <button className={`${btn.submitBtn} mt-6 ml-38`}>ログイン</button>

@@ -35,14 +35,14 @@ const Search = ({onSearch}: Props) => {
                             type="text"
                             value={keyword}
                             onChange={(e) => setKeyword(e.target.value)}
-                            className={`${styles.admin_input} max-w-[200px] w-full`} />
+                            className={`${styles.admin_input} w-[180px]`} />
                     </label>
                     <label className={`${styles.label} mt-3`}>カテゴリー検索：
                         <select
                             value={category}
                             name="category"
                             onChange={(e) => setCategory(e.target.value)}
-                            className={`${styles.admin_input} max-w-[200px] w-full text-center`}
+                            className={`${styles.admin_input} w-[180px] text-center`}
                         >
                             <option value="">全カテゴリー</option>
                             {categories.map((c: Category) => (
@@ -55,7 +55,7 @@ const Search = ({onSearch}: Props) => {
                             name="stock"
                             value={sort}
                             onChange={(e) => setSort(e.target.value)}
-                            className={`${styles.admin_input} max-w-[200px] w-full text-center`}
+                            className={`${styles.admin_input} w-[180px] text-center`}
                         >
                             <option value="">並び替えなし</option>
                             <option value="price_asc">価格が安い順</option>

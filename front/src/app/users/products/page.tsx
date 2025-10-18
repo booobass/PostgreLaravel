@@ -104,19 +104,19 @@ const Products = () => {
                                 <input type="hidden" name="product_id" value={product.id} />
                                 {
                                     product.stock > 0 ? (
-                                        <label className={form.label}>個数：
+                                        <label className={`${form.label} text-center font-bold mt-3`}>購入数：
                                             <input
                                                 type="number"
                                                 name="quantity"
                                                 value={quantity[product.id] || ""}
                                                 onChange={(e) => setQuantity({...quantity, [product.id]: e.target.value})}
-                                                className={form.admin_input} />
+                                                className={`${form.admin_input} w-[80px]`} />
                                         </label>
                                     ) : <p className="p-1 font-bold">※売り切れました</p>
                                 }
                                 <button
                                     disabled={product.stock <= 0}
-                                    className={`${btn.submitBtn} mt-6 ml-26 mb-6`}
+                                    className={`${btn.submitBtn} mt-3 ml-26 mb-6`}
                                 >カートに入れる
                                 </button>
                                 {error[product.id] && <p
