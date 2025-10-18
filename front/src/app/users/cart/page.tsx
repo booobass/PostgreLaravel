@@ -70,8 +70,8 @@ const Cart = () => {
                                             />
                                     </div>
                                     <div className="content-center ml-6">
-                                        <p className="font-bold">{cart.product?.name}：¥{cart.product?.price}</p>
-                                        <p>{cart.quantity}個</p>
+                                        <p className="font-bold">{cart.product?.name}</p>
+                                        <p>¥{cart.product?.price}：{cart.quantity}個</p>
                                     </div>
                                 </div>
                                 <button

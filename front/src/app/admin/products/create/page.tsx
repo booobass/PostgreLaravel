@@ -109,7 +109,7 @@ const CreateAdminProducts = () => {
             <div className={`${styles.admin_main} w-[700px]`}>
                 <h4 className="text-xl font-bold">商品登録</h4>
                 <form onSubmit={handleSubmit} className={styles.admin_form}>
-                    <label className={`${styles.label}`}>商品名：
+                    <label className={`${styles.label}`}>商品名<span className="text-red-800">（必須）</span>：
                         <input
                             type="text"
                             name="name"
@@ -117,7 +117,7 @@ const CreateAdminProducts = () => {
                             onChange={handleChange}
                             className={styles.admin_input} />
                     </label>
-                    <label className={`${styles.label} mt-3`}>値段：
+                    <label className={`${styles.label} mt-3`}>値段<span className="text-red-800">（必須）</span>：
                         <input
                             type="number"
                             name="price"
@@ -129,7 +129,7 @@ const CreateAdminProducts = () => {
                         <div {...getRootProps()}>
                             <input {...getInputProps()} />
                             {isDragActive}
-                            <p>ここに画像をドロップして下さい</p>
+                            <p>ここに画像<span className="text-red-800">（必須）</span>をドロップして下さい</p>
                         </div>
                         {image && <p>選択した画像：{image.name}</p>}
                     </label>
@@ -153,7 +153,7 @@ const CreateAdminProducts = () => {
                                 className={styles.admin_input} />
                         </label>
                     ))}
-                    <label className={`${styles.label} mt-3`}>在庫数：
+                    <label className={`${styles.label} mt-3`}>在庫数<span className="text-red-800">（必須）</span>：
                         <input
                             type="number"
                             name="stock"

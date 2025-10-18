@@ -77,6 +77,9 @@ const Register = () => {
                                 required
                                 className={`${styles.input} max-sm:block`} />
                         </label>
+                        {user.password.length >= 6 || user.password.length === 0 ? null : (
+                            <p className="text-sm text-red-800">８文字以上で登録して下さい</p>
+                        )}
                         <label className={`${styles.label} font-[500] mt-3`}>パスワード確認：
                             <input
                                 type="text"
@@ -87,7 +90,7 @@ const Register = () => {
                                 className={`${styles.input} max-sm:block`} />
                         </label>
                         {user.password === user.password_confirmation ? null : (
-                            <p>パスワードが一致しません</p>
+                            <p className="text-sm text-red-800">パスワードが一致しません</p>
                         )}
                     </div>
                     <button className={`${btn.submitBtn} mt-6 ml-44`}>登録</button>

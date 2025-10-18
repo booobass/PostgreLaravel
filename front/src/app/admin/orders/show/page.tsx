@@ -68,7 +68,7 @@ const ShowOrder = () => {
                                 <th>支払い方法</th>
                                 <th>状態</th>
                                 <th colSpan={2}>状態更新</th>
-                                <th>完了</th>
+                                <th>注文削除</th>
                             </tr>
                         </thead>
                         <tbody className={tb.tbody}>
