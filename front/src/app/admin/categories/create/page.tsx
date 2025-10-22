@@ -3,7 +3,6 @@
 import api from "@/lib/axios"
 import btn from "@/styles/button.module.css"
 import styles from "@/styles/form.module.css"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
@@ -43,10 +42,6 @@ const CreateCategory = () => {
                     </label>
                     <button className={`${btn.adminBtn} mt-6 ml-50 font-bold`}>登録</button>
                 </form>
-                <div className={`${btn.linkBtn} mt-8 w-[400px]`}>
-                    <Link href={"/admin/categories/show"}>カテゴリー一覧</Link>
-                    <Link href={"/admin/products/create"}>商品登録</Link>
-                </div>
             </div>
         </div>
     )

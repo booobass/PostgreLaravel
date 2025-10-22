@@ -11,7 +11,7 @@ export const DeleteOrder = (onDeleted?: () => void) => {
             alert("削除しました")
             if(onDeleted) onDeleted()
         } catch {
-            alert("削除出来ません")
+            alert("権限がありません")
         }
     }
 

@@ -5,7 +5,6 @@ import api from "@/lib/axios"
 import btn from "@/styles/button.module.css"
 import tb from "@/styles/table.module.css"
 import { OrderType } from "@/type/type"
-import Link from "next/link"
 import { Fragment, useEffect, useState } from "react"
 
 const ShowOrder = () => {
@@ -120,9 +119,6 @@ const ShowOrder = () => {
                 ) : (
                     <p className="mt-8 font-bold">現在、注文はありません</p>
                 )}
-                <div className={`${btn.linkBtn} mt-10 w-[160px]`}>
-                    <Link href={"/admin/users"}>ユーザー管理</Link>
-                </div>
             </div>
         </div>
     )

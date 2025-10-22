@@ -1,13 +1,11 @@
 "use client"
 
-import LogoutButton from "@/components/LogoutButton"
 import api from "@/lib/axios"
-import btn from "@/styles/button.module.css"
 import tb from "@/styles/table.module.css"
 import styles from "@/styles/user_product.module.css"
 import { OrderType } from "@/type/type"
-import Link from "next/link"
 import { Fragment, useEffect, useState } from "react"
+import UserHeader from "../../header"
 
 
 const OrderHistory = () => {
@@ -31,8 +29,9 @@ const OrderHistory = () => {
     return (
         <div className="warapper">
             <div className={styles.main}>
-                <div className={styles.title}>
-                    <h3>注文履歴</h3>
+                <UserHeader />
+                <div className={`${styles.title} mt-4`}>
+                    <h3>購入履歴</h3>
                 </div>
                 {orders.length !== 0 ? (
                     <div className="mt-8 overflow-x-auto max-w-full sm:max-w-[680px]">
@@ -85,10 +84,6 @@ const OrderHistory = () => {
                     <p className="mt-8 font-bold">注文履歴はありません</p>
                 )}
             </div>
-            <div className={`${btn.submitBtn} mt-8 w-[180px] text-center`}>
-                <Link href={"/users/products"}>商品購入画面</Link>
-            </div>
-            <LogoutButton />
         </div>
     )
 

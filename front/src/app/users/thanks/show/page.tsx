@@ -1,10 +1,8 @@
 "use client"
 
-import LogoutButton from "@/components/LogoutButton"
-import btn from "@/styles/button.module.css"
 import styles from "@/styles/user_product.module.css"
-import Link from "next/link"
 import { notFound, useSearchParams } from "next/navigation"
+import UserHeader from "../../header"
 
 type Props = {
     name: string;
@@ -28,7 +26,8 @@ const ThanksUser = () => {
     return (
         <div className="warapper">
             <div className={`${styles.main}`}>
-                <div className={`${styles.title}`}>
+                <UserHeader />
+                <div className={`${styles.title} mt-4`}>
                     <h4>注文完了</h4>
                 </div>
                 <div className="mt-8 font-bold">
@@ -48,16 +47,15 @@ const ThanksUser = () => {
                                 )}
                             </div>
                         ))}
-                        <p className="mt-3"><span className="font-bold">合計</span>（税込）：¥{thanksData.total}</p>
-                        <p><span className="font-bold">お支払い方法</span>：{thanksData.payment === "cash" ? "現金" : "クレジット"}</p>
+                        <div>
+                            <p className="mt-3"><span className="font-bold">合計</span>（税込）：¥{thanksData.total}</p>
+                        </div>
+                        <div className="mt-1">
+                            <p><span className="font-bold">お支払い方法</span>：{thanksData.payment === "cash" ? "現金" : "クレジット"}</p>
+                        </div>
                     </div>
                 </div>
-                <div className={`${btn.userLink} mt-10 w-[280px]`}>
-                    <Link href={"/users/products"}>商品一覧</Link>
-                    <Link href={"/users/order/history"}>購入履歴</Link>
-                </div>
             </div>
-            <LogoutButton />
         </div>
         
     )

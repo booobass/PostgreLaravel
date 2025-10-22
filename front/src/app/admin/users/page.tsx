@@ -4,7 +4,6 @@ import api from "@/lib/axios";
 import btn from "@/styles/button.module.css";
 import tb from "@/styles/table.module.css";
 import { User } from "@/type/type";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const AdminUser = () => {
@@ -96,11 +95,6 @@ const AdminUser = () => {
                         ))}
                     </tbody>
                 </table>
-                <div className={`${btn.linkBtn} mt-10 w-[400px]`}>
-                    <Link href={"/admin/products/show"}>商品管理</Link>
-                    <Link href={"/admin/products/create"}>商品登録</Link>
-                    <Link href={"/admin/orders/show"}>注文管理</Link>
-                </div>
             </div>
         </div>
     )

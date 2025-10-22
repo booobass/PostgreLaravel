@@ -1,5 +1,4 @@
 "use client"
-import LogoutButton from "@/components/LogoutButton"
 import { ReadProduct } from "@/components/ReadProduct"
 import Search from "@/components/Search"
 import api from "@/lib/axios"
@@ -9,8 +8,8 @@ import styles from "@/styles/user_product.module.css"
 import { Product } from "@/type/type"
 import { AxiosError } from "axios"
 import Image from "next/image"
-import Link from "next/link"
 import { useState } from "react"
+import UserHeader from "../header"
  
 
 const Products = () => {
@@ -58,15 +57,13 @@ const Products = () => {
     return (
         <div className="warapper">
             <div className={`${styles.main}`}>
-                <div className={`${styles.title}`}>
+                <UserHeader />
+
+                <div className={`${styles.title} mt-3`}>
                     <h3>商品一覧</h3>
                 </div>
                 <Search onSearch={setParams} />
                 {loading && <p>読み込み中、、、</p>}
-                <div className={`${btn.userLink} w-[300px]`}>
-                    <Link href={"/users/order/history"}>購入履歴</Link>
-                    <Link href={"/users/cart"}>カートを確認</Link>
-                </div>
                 <div className={`${styles.product} mt-8`}>
                     {products.map((product :Product) => (
                         <div key={product.id} className={`${styles.content}`}>
@@ -127,7 +124,6 @@ const Products = () => {
                     ))}
                 </div>
             </div>
-            <LogoutButton />
         </div>
     )
 }

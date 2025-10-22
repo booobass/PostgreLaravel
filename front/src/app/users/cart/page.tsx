@@ -7,6 +7,7 @@ import styles from "@/styles/user_product.module.css";
 import { CartType } from "@/type/type";
 import Image from "next/image";
 import Link from "next/link";
+import UserHeader from "../header";
 
 const Cart = () => {
 
@@ -51,9 +52,20 @@ const Cart = () => {
     return (
         <div className="warapper">
             <div className={`${styles.main}`}>
-                <div className={styles.title}>
+                <UserHeader />
+                <div className={`${styles.title} mt-4`}>
                     <h3>カート内容</h3>
                 </div>
+                    <div className={`${btn.userLink} mt-8 w-[280px]`}>
+                    <Link
+                        href={"../users/order/show"}
+                        className={`${carts.length === 0 ? "pointer-events-none" : ""} hover:font-bold`}
+                    >
+                        注文画面に進む
+                    </Link>
+                    <Link href={"../users/products"} className="hover:font-bold">戻る</Link>
+                </div>
+
                 {carts.length !== 0 ? (
                     <div className={`${styles.product} mt-8`}>
                         {carts.map((cart :CartType) => (
@@ -85,15 +97,6 @@ const Cart = () => {
                 ) : (
                     <p className="mt-8 font-bold">カートは空です</p>
                 )}
-                <div className={`${btn.userLink} mt-8 w-[280px]`}>
-                    <Link
-                        href={"../users/order/show"}
-                        className={`${carts.length === 0 ? "pointer-events-none" : ""}`}
-                    >
-                        注文画面に進む
-                    </Link>
-                    <Link href={"../users/products"}>戻る</Link>
-                </div>
             </div>
         </div>
     )
