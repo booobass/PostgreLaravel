@@ -17,8 +17,8 @@ const AdminHeader = () => {
         <header className="justify-items-center">
             <nav className={`${btn.linkBtn} flex gap-8`}>
                 <Link
-                    href={"/users/products"}
-                    className={`${pathname !== "/users/products" ? "text-gray-400" : ""} p-2 hover:font-bold hover:text-[#666]`}>ユーザーページ
+                    href={"/"}
+                    className={`${pathname !== "/" ? "text-gray-400" : ""} p-2 hover:font-bold hover:text-[#666]`}>トップページ
                 </Link>
                 <Link
                     href={"/admin/users"}

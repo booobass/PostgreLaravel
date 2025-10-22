@@ -13,6 +13,7 @@ const renderWithAuth = (ui: React.ReactNode) => {
   return render(<AuthProvider>{ui}</AuthProvider>)
 }
 
+
 const mockReadProduct = jest.fn()
 jest.mock("@/components/ReadProduct", () => ({
   ReadProduct: () => mockReadProduct()
@@ -32,6 +33,7 @@ describe("Products コンポーネント", () => {
   const user = userEvent.setup()
 
   beforeEach(() => {
+    localStorage.setItem("token", "fake-token")
     // デフォルトのモック値（通常商品）
     mockReadProduct.mockReturnValue({
       products: [
@@ -61,7 +63,7 @@ describe("Products コンポーネント", () => {
     mockedApi.post.mockResolvedValue({ data: {} } as AxiosResponse)
     renderWithAuth(<Products />)
 
-    const button = screen.getByText("カートに入れる")
+    const button = await screen.findByText("カートに入れる")
     await user.click(button)
 
     expect(mockedApi.post).toHaveBeenCalledWith(

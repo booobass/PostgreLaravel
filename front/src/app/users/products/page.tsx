@@ -8,22 +8,38 @@ import styles from "@/styles/user_product.module.css"
 import { Product } from "@/type/type"
 import { AxiosError } from "axios"
 import Image from "next/image"
-import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
 import UserHeader from "../header"
  
 
 const Products = () => {
 
+    const router = useRouter()
     
     const [params, setParams] = useState({})
     
-    const {products, loading, fetchProducts} = ReadProduct(params)
-
     const [quantity, setQuantity] = useState<{[key: number]: string}>({})
-
+    
     const [error, setError] = useState<{ [key: number]: string | null}>({})
 
+    const [isAuth, setIsAuth] = useState(false)
     console.log("PP", params)
+
+    
+    useEffect(() => {
+        const token = localStorage.getItem("token")
+        if(!token) {
+            alert("ログインしてください")
+            router.push("/")
+            return
+        } else {
+            setIsAuth(true)
+        }
+    }, [router])
+
+    const {products, loading, fetchProducts} = ReadProduct(params, isAuth)
+
 
     const handleCart = async (e: React.FormEvent<HTMLFormElement>, product_id: number) => {
         e.preventDefault()
@@ -52,7 +68,11 @@ const Products = () => {
     console.log("QQ",quantity)
     console.log("categ", products)
 
-
+if(!isAuth) {
+    return (
+        <div className="flex justify-center items-center h-screen">Loading...</div>
+    )
+}
 
     return (
         <div className="warapper">
