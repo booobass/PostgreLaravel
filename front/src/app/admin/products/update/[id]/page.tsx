@@ -146,7 +146,7 @@ const AdminUpdate = () => {
                             name="price"
                             value={products.price}
                             onChange={handleChange}
-                            className={styles.admin_input} />
+                            className={`${styles.admin_input} w-[130px]`} />
                     </label>
                     <div className="mt-3">
                         <p>現在の写真</p>
@@ -195,7 +195,7 @@ const AdminUpdate = () => {
                             name="stock"
                             value={products.stock}
                             onChange={handleChange}
-                            className={styles.admin_input} />
+                            className={`${styles.admin_input} w-[80px]`} />
                     </label>
                     <button className={`${btn.adminBtn} mt-6 ml-55 font-bold`}>更新</button>
                 </form>

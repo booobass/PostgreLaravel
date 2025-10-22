@@ -83,9 +83,11 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Order $order)
     {
-        $this->orderService->deleteOrder($id);
+        Gate::authorize('delete', $order);
+
+        $this->orderService->deleteOrder($order->id);
 
         return response()->json(['message' => '削除しました']);
     }

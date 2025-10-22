@@ -50,7 +50,7 @@ const Login = () => {
                 router.push("../users/products")
             }
         } catch {
-            alert("メールアドレス、またはパスワードが違います")
+            alert("メールアドレスが違います")
         }
     }
 

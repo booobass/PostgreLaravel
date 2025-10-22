@@ -2,7 +2,6 @@
 
 import { useAuth } from "@/context/AuthContext"
 import api from "@/lib/axios"
-import btn from "@/styles/button.module.css"
 import { useRouter } from "next/navigation"
 
 const LogoutButton = () => {
@@ -30,8 +29,8 @@ const LogoutButton = () => {
     }
 
     return (
-        <div className="warapper max-w-[800px] w-full">
-            <button onClick={handleDelete} className={btn.logout}>ログアウト</button>
+        <div>
+            <button onClick={handleDelete}>ログアウト</button>
         </div>
     )
 }

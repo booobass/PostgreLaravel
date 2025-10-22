@@ -5,7 +5,6 @@ import api from "@/lib/axios"
 import btn from "@/styles/button.module.css"
 import styles from "@/styles/form.module.css"
 import { Category } from "@/type/type"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useCallback, useState } from "react"
 import { useDropzone } from "react-dropzone"
@@ -163,11 +162,6 @@ const CreateAdminProducts = () => {
                     </label>
                     <button className={`${btn.adminBtn} mt-6 ml-50 font-bold`}>登録</button>
                 </form>
-                <div className={`${btn.linkBtn} mt-10 w-[500px]`}>
-                    <Link href={"/admin/categories/create"}>カテゴリー作成</Link>
-                    <Link href={"/admin/products/show"}>商品管理</Link>
-                    <Link href={"/admin/users"}>ユーザー管理</Link>
-                </div>
             </div>
         </div>
     )

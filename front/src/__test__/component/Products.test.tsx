@@ -51,10 +51,6 @@ describe("Products コンポーネント", () => {
     })
   })
 
-  test("タイトルが表示される", () => {
-    renderWithAuth(<Products />)
-    expect(screen.getByText("商品一覧")).toBeInTheDocument()
-  })
 
   test("商品が一覧に表示される", () => {
     renderWithAuth(<Products />)

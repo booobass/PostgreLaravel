@@ -15,7 +15,7 @@ const ShowCategory = () => {
     return (
         <div className="warapper">
             <div className={`${tb.main} w-[600px]`}>
-                <h4 className="text-xl font-bold">カテゴリー一覧</h4>
+                <h4 className="text-xl font-bold">カテゴリー管理</h4>
                 <table className="mt-6">
                     <thead>
                         <tr>
@@ -37,10 +37,6 @@ const ShowCategory = () => {
                         ))}
                     </tbody>
                 </table>
-                <div className={`${btn.linkBtn} mt-8 font-bold w-[400px]`}>
-                    <Link href={"/admin/categories/create"}>カテゴリー作成</Link>
-                    <Link href={"/admin/products/create"}>商品登録</Link>
-                </div>
             </div>
         </div>
     )

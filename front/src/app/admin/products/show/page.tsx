@@ -48,10 +48,6 @@ const AdminShow = () => {
                         </div>
                     ))}
                 </div>
-                <div className={`${btn.linkBtn} mt-10 w-[400px]`}>
-                    <Link href={"../products/create"}>商品登録</Link>
-                    <Link href={"../users"}>ユーザー管理</Link>
-                </div>
             </div>
         </div>
     )

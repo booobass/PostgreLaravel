@@ -8,9 +8,9 @@ import btn from "@/styles/button.module.css"
 import form from "@/styles/form.module.css"
 import styles from "@/styles/user_product.module.css"
 import { CartType } from "@/type/type"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import React, { useState } from "react"
+import UserHeader from "../../header"
 
 type Props = {
     name: string;
@@ -67,7 +67,8 @@ const ShowOrder = () => {
     return (
         <div className="warapper">
             <div className={`${styles.main}`}>
-                <div className={`${styles.title}`}>
+                <UserHeader />
+                <div className={`${styles.title} mt-4`}>
                     <h3>注文情報入力</h3>
                 </div>
                 <div className="mt-6">
@@ -100,10 +101,6 @@ const ShowOrder = () => {
                     </label>
                     <button className={`${btn.submitBtn} mt-8 ml-28`}>注文する</button>
                 </form>
-                <div className={`${btn.userLink} mt-8 w-[280px]`}>
-                    <Link href={"/users/products"}>商品一覧</Link>
-                    <Link href={"/users/cart"}>カート内容</Link>
-                </div>
             </div>
         </div>
     )
