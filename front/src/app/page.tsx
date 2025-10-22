@@ -56,6 +56,7 @@ const Page = () => {
             <nav className={`mt-8 max-w-[800px] w-full`}>
               <div className={`${zen.className} ${border.solid_s} flex justify-evenly font-[500] max-sm:flex-col max-sm:items-center max-sm:gap-2`}>
                 <p>自家栽培のお野菜をどうぞ</p>
+                <Link href={"/users/products"}>商品購入</Link>
                 <Link href={"/users/login"}>ログイン</Link>
                 <Link href={"/users/register"}>ユーザー登録</Link>
               </div>

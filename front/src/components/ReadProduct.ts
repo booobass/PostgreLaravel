@@ -10,7 +10,7 @@ type Props = {
     sort?: string
 }
 
-export const ReadProduct = (params: Props = {}) => {
+export const ReadProduct = (params: Props = {}, isAuth = true) => {
     const [products, setProducts] = useState<Product[]>([])
     const [lastPage, setLastPage] = useState(1)
     const [loading, setLoading] = useState(false)
@@ -48,6 +48,7 @@ export const ReadProduct = (params: Props = {}) => {
     // }, [stableParams])
 
     const fetchProducts = useCallback(async () => {
+        if(!isAuth) return
         try {
             setLoading(true)
             const response = await api.get("/api/product", {
@@ -61,7 +62,7 @@ export const ReadProduct = (params: Props = {}) => {
         } finally {
             setLoading(false)
         }
-    }, [stableParams])
+    }, [stableParams, isAuth])
 
     useEffect(() => {
         fetchProducts()
