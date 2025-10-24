@@ -46,7 +46,7 @@ const ShowOrder = () => {
             fetchOrder()
             alert("変更完了")
         } catch {
-            alert("変更失敗")
+            alert("権限がありません")
         }
     }
 

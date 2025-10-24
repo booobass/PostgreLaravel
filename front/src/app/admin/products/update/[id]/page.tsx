@@ -84,7 +84,7 @@ const AdminUpdate = () => {
             alert("更新しました")
             router.push("/admin/products/show")
         } catch {
-            alert("更新出来ません")
+            alert("権限がありません")
         }
     }
 

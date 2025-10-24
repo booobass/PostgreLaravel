@@ -31,7 +31,7 @@ const AdminDelete = () => {
             alert("削除しました")
             router.push("/admin/products/show")
         } catch {
-            alert("削除出来ません")
+            alert("権限がありません")
         }
     }
 

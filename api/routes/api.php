@@ -24,22 +24,22 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('/admin/store', [AdminController::class, 'store']);
+    Route::post('/admin/store', [AdminController::class, 'store'])->middleware('demo');
     Route::post('/product/store', [ProductController::class, 'store']);
     Route::get('/product', [ProductController::class, 'index']);
-    Route::patch('/product/{product}', [ProductController::class, 'update']);
-    Route::delete('/product/{product}', [ProductController::class, 'destroy']);
+    Route::patch('/product/{product}', [ProductController::class, 'update'])->middleware('demo');
+    Route::delete('/product/{product}', [ProductController::class, 'destroy'])->middleware('demo');
     Route::post('/category/store', [CategoryController::class, 'store']);
     Route::get('/category', [CategoryController::class, 'index']);
-    Route::patch('category/{category}', [CategoryController::class, 'update']);
-    Route::delete('category/{category}', [CategoryController::class, 'destroy']);
+    Route::patch('category/{category}', [CategoryController::class, 'update'])->middleware('demo');
+    Route::delete('category/{category}', [CategoryController::class, 'destroy'])->middleware('demo');
     Route::post('/cart/store', [CartController::class, 'store']);
     Route::get('/cart', [CartController::class, 'index']);
     Route::delete('cart/{cart}', [CartController::class, 'destroy']);
     Route::post('/order/store', [OrderController::class, 'store']);
     Route::get('/order', [OrderController::class, 'index']);
-    Route::delete('/order/{order}', [OrderController::class, 'destroy']);
-    Route::patch('/order/{order}/status', [OrderController::class, 'updateStatus']);
+    Route::delete('/order/{order}', [OrderController::class, 'destroy'])->middleware('demo');
+    Route::patch('/order/{order}/status', [OrderController::class, 'updateStatus'])->middleware('demo');
     Route::get('/order/user', [OrderController::class, 'userOrders']);
     Route::get('/user', [AuthenticatedSessionController::class, 'index']);
 });

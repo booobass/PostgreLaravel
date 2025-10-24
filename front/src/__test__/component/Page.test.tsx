@@ -1,5 +1,11 @@
 import { render, screen } from "@testing-library/react"
+import { useRouter } from "next/navigation"
 import Page from "../../app/page"
+import { AuthProvider } from "@/context/AuthContext"
+
+const renderWithAuth = (ui: React.ReactNode) => {
+  return render(<AuthProvider>{ui}</AuthProvider>)
+}
 
 jest.mock("@/components/ReadProduct", () => ({
     CustomerProduct: () => ({
@@ -15,25 +21,36 @@ jest.mock("@/components/ReadProduct", () => ({
     })
 }))
 
+jest.mock("next/navigation", () => ({
+    useRouter: jest.fn()
+}))
+
 describe("Page コンポーネント", () => {
-    it("タイトルが表示される", async () => {
-        const PageComponent = await Page()
-        render(PageComponent)
+    const mockPush = jest.fn()
+
+    beforeEach(() => {
+        (useRouter as jest.Mock).mockReturnValue({push: mockPush})
+    })
+
+    afterEach(() => {
+        jest.restoreAllMocks()
+    })
+
+    test("タイトルが表示される", () => {
+        renderWithAuth(<Page />)
         expect(
             screen.getByRole("heading", {name: /L'orto della Nonna/i })
         ).toBeInTheDocument()
     })
 
-    it("ログインとユーザー登録リンクがある", async () => {
-        const PageComponent = await Page()
-        render(PageComponent)
+    test("ログインとユーザー登録リンクがある", () => {
+        renderWithAuth(<Page />)
         expect(screen.getByRole("link", { name: "ログイン" })).toBeInTheDocument()
         expect(screen.getByRole("link", { name: "ユーザー登録" })).toBeInTheDocument()
     })
 
-    it("旬の商品が Card に渡されて表示される", async () => {
-        const PageComponent = await Page()
-        render(PageComponent)
+    test("旬の商品が Card に渡されて表示される", () => {
+        renderWithAuth(<Page />)
         expect(screen.getByText((content) => content.startsWith("にんじん"))).toBeInTheDocument()
     })
 })
