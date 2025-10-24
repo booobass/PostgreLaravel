@@ -45,7 +45,7 @@ const UpdateCategory = () => {
             alert("更新しました")
             router.push("/admin/categories/show")
         } catch {
-            alert("更新できません")
+            alert("権限がありません")
         }
     }
 

@@ -33,7 +33,7 @@ const DeleteCategory = () => {
             alert("削除しました")
 
         } catch {
-            alert("削除出来ません")
+            alert("権限がありません")
         }
 
     }

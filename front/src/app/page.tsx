@@ -1,6 +1,7 @@
 "use client"
 
 import Card from "@/components/Card"
+import DemoLogin from "@/components/DemoLogin"
 import { CustomerProduct } from "@/components/ReadProduct"
 import { jose, zen } from "@/fonts/fonts"
 import border from "@/styles/border.module.css"
@@ -60,6 +61,9 @@ const Page = () => {
                 <Link href={"/users/login"}>ログイン</Link>
                 <Link href={"/users/register"}>ユーザー登録</Link>
               </div>
+            </nav>
+            <nav>
+              <DemoLogin />
             </nav>
 
           <div className="mt-3 grid grid-cols-2 gap-1 max-sm:grid-cols-1">
