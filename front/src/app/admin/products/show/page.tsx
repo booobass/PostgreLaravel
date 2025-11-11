@@ -25,7 +25,7 @@ const AdminShow = () => {
                         <div key={product.id} className={`${styles.product} mt-6`}>
                             <div className="relative w-[100px] h-[90px]">
                                 <Image
-                                    src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${product.image}`}
+                                    src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/images/${product.image}`}
                                     // height={100}
                                     // width={100}
                                     alt={product.name}

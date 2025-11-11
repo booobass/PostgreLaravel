@@ -153,7 +153,7 @@ const AdminUpdate = () => {
                         {typeof products.image === "string" && products.image && (
                             <div className="relative w-[90px] h-[80px]">
                                 <Image
-                                    src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${products.image}`}
+                                    src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/images/${products.image}`}
                                     alt={`${products.name}`}
                                     fill
                                     sizes="90px"

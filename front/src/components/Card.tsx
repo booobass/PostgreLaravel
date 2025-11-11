@@ -21,7 +21,7 @@ const Card = ({items} :{items: Product[]}) => {
                                 <div className="justify-items-center">
                                     <div className="relative max-w-[100px] w-full h-[90px]">
                                         <Image
-                                            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${s.image}`}
+                                            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/images/${s.image}`}
                                             alt={s.name}
                                             priority
                                             fill

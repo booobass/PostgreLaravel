@@ -101,7 +101,7 @@ if(!isAuth) {
                                 <div className="flex mt-3 justify-center">
                                     <div className="relative w-[100px] h-[90px]">
                                         <Image
-                                            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${product.image}`}
+                                            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/images/${product.image}`}
                                             alt={product.name}
                                             fill
                                             sizes="100px"
