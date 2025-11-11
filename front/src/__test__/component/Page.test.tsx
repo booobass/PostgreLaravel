@@ -3,6 +3,8 @@ import { render, screen } from "@testing-library/react"
 import { useRouter } from "next/navigation"
 import Page from "../../app/page"
 
+process.env.NEXT_PUBLIC_BACKEND_URL = "http://localhost:8000"
+
 const renderWithAuth = (ui: React.ReactNode) => {
   return render(<AuthProvider>{ui}</AuthProvider>)
 }

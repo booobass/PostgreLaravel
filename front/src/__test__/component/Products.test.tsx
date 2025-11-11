@@ -7,7 +7,7 @@ import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { AxiosResponse } from "axios"
 
-
+process.env.NEXT_PUBLIC_BACKEND_URL = "http://localhost:8000"
 
 const renderWithAuth = (ui: React.ReactNode) => {
   return render(<AuthProvider>{ui}</AuthProvider>)
@@ -43,7 +43,7 @@ describe("Products コンポーネント", () => {
           price: 1000, 
           description: "テスト",
           stock: 5, 
-          image: "http://img.png", 
+          image: "img.png", 
           pivot: { order_id: 1, product_id: 1, quantity: 3, price: 120 },
           categories: [] 
         }
