@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "postgrelaravel-production.up.railway.app",
-        pathname: "/images/**",
+        pathname: "/storage/images/**",
       }
     ]
   }
