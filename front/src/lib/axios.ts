@@ -1,12 +1,14 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://localhost:8000",
+    baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
     headers: {
         "Accept": "application/json",
         "Content-Type": "application/json"
     },
-    withCredentials: true
+    withCredentials: true,
+    xsrfCookieName: "XSRF-TOKEN",
+    xsrfHeaderName: "X-XSRF-TOKEN",
 })
 
 export default api

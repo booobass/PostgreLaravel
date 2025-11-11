@@ -29,7 +29,7 @@ const Register = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         try {
-            await api.post("/api/register",
+            const response = await api.post("/api/register",
                 {
                     name: user.name,
                     email: user.email,
@@ -37,6 +37,8 @@ const Register = () => {
                     password_confirmation: user.password_confirmation
                 }
             )
+            const token = response.data.token
+            localStorage.setItem("auth_token", token)
             alert("登録しました")
             router.push("/users/login")
         } catch {
