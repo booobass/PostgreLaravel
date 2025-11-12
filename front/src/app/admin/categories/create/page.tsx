@@ -21,7 +21,7 @@ const CreateCategory = () => {
                 headers: {"Authorization": `Bearer ${localStorage.getItem("token")}`}
             })
             alert("カテゴリー登録")
-            router.push("/admin/products/create")
+            router.push("/admin/categories/show")
         } catch {
             alert("登録出来ません")
         }

@@ -40,7 +40,7 @@ const Page = () => {
       special.push(p)
     } else if (categoryNames.includes("旬")) {
       seasonal.push(p)
-    } else if (categoryNames.includes("もうすぐ発売")) {
+    } else if (categoryNames.includes("限定商品")) {
       newproduct.push(p)
     }
   })
