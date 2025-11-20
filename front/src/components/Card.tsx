@@ -27,6 +27,8 @@ const Card = ({items} :{items: Product[]}) => {
                                             fill
                                             sizes="100px"
                                             className="object-cover object-center rounded-sm"
+                                            unoptimized
+                                            loader={({src}) => src}
                                         />
                                     </div>
                                     <div className="md:flex font-[700] text-xl">
