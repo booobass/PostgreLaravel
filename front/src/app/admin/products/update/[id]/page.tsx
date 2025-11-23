@@ -20,7 +20,8 @@ const AdminUpdate = () => {
         price: "",
         description: "",
         stock: "",
-        image: "" as File | string
+        image: "" as File | string,
+        image_url: ""
     })
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -45,7 +46,8 @@ const AdminUpdate = () => {
                 price: singleProduct.price,
                 description: singleProduct.description,
                 stock: singleProduct.stock,
-                image: singleProduct.image
+                image: singleProduct.image,
+                image_url: singleProduct.image_url
             })
 
             if(singleProduct.categories) {
@@ -153,7 +155,7 @@ const AdminUpdate = () => {
                         {typeof products.image === "string" && products.image && (
                             <div className="relative w-[90px] h-[80px]">
                                 <Image
-                                    src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/images/${products.image}`}
+                                    src={`${products.image_url}`}
                                     alt={`${products.name}`}
                                     fill
                                     sizes="90px"

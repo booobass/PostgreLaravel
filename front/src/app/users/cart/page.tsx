@@ -73,7 +73,7 @@ const Cart = () => {
                                 <div className="flex justify-center mt-3">
                                     <div className="relative w-[100px] h-[90px]">
                                         <Image
-                                            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/images/${cart.product?.image}`}
+                                            src={`${cart.product?.image_url}`}
                                             alt={cart.product?.name || ""}
                                             priority
                                             fill

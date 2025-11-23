@@ -105,9 +105,13 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
+        // $product = Product::find($id);
 
-        return response()->json(['product' => $product->load('categories')]);
+        // return response()->json(['product' => $product->load('categories')]);
+        $product = Product::with('categories')->findOrFail($id);
+        $product->image_url = Storage::disk('s3')->url($product->image);
+
+        return response()->json(['product' => $product]);
     }
 
     /**
