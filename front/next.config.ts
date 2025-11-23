@@ -11,11 +11,17 @@ const nextConfig: NextConfig = {
         port: '8000',
         pathname: '/storage/images/**',
       },
+      // {
+      //   protocol: "https",
+      //   hostname: "postgrelaravel-production.up.railway.app",
+      //   pathname: "/storage/images/**",
+      // }
       {
-        protocol: "https",
-        hostname: "postgrelaravel-production.up.railway.app",
-        pathname: "/storage/images/**",
-      }
+        protocol: 'https',
+        hostname: 'postgre-laravel-bucket.s3.amazonaws.com',
+        port: '',
+        pathname: '/**',
+      },
     ]
   }
 };

@@ -95,7 +95,7 @@ class ProductController extends Controller
             $product->categories()->sync($categories);
         }
 
-        $product->image_url = $path ? Storage::disk('s3')->url($path) : null;
+        $product->image_url = $product->image ? Storage::disk('s3')->url($product->image) : null;
 
         return response()->json(['product' => $product->load('categories')]);
     }
