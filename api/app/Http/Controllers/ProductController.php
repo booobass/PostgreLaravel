@@ -80,8 +80,8 @@ class ProductController extends Controller
             // $name = date('YmdHis') . '_' . $original;
             // request()->file('image')->move('storage/images', $name);
             // $validated['image'] = $name;
-            $path = $request->file('image')->store('images', 'public');
-            $validated['image'] = basename($path);
+            $path = $request->file('image')->store('images', 's3');
+            $validated['image'] = $path;
         }
 
         $categories = $validated['categories'] ?? [];
@@ -94,6 +94,8 @@ class ProductController extends Controller
         if(!empty($categories)) {
             $product->categories()->sync($categories);
         }
+
+        $product->image_url = $path ? Storage::disk('s3')->url($path) : null;
 
         return response()->json(['product' => $product->load('categories')]);
     }
@@ -135,10 +137,10 @@ class ProductController extends Controller
 
         if($request->hasFile('image')) {
             if($product->image) {
-                Storage::disk('public')->delete('images/' . $product->image);
+                Storage::disk('s3')->delete($product->image);
             }
-            $path = $request->file('image')->store('images', 'public');
-            $validated['image'] = basename($path);
+            $path = $request->file('image')->store('images', 's3');
+            $validated['image'] = $path;
         }
 
         $categories = $validated['categories'] ?? [];
@@ -149,6 +151,8 @@ class ProductController extends Controller
 
         // 中間テーブルの同期
         $product->categories()->sync($categories);
+
+        $product->image_url = $product->image ? Storage::disk('s3')->url($product->image) : null;
 
         return response()->json(['product' => $product->load('categories')]);
 
@@ -162,7 +166,7 @@ class ProductController extends Controller
         Gate::authorize('delete', $product);
 
         if($product->image) {
-            Storage::disk('public')->delete('images/' . $product->image);
+            Storage::disk('s3')->delete($product->image);
         }
 
         $product->categories()->detach();
