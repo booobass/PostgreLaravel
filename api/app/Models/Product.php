@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -43,6 +44,16 @@ class Product extends Model
     {
         return $this->belongsToMany(Order::class, 'order_products')
             ->withPivot('quantity', 'price');
+    }
+
+    protected $appends = ['image_url'];
+
+    public function getImageUrlAttribute()
+    {
+        if (!$this->image) {
+            return null;
+        }
+        return Storage::disk('s3')->url($this->image);
     }
 
 }
