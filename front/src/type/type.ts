@@ -38,6 +38,7 @@ export type Product = {
     name: string;
     description: string;
     image?: string;
+    image_url: string
     price: number;
     stock: number;
     categories?: Category[];
