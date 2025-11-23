@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
       // }
       {
         protocol: 'https',
-        hostname: 'postgre-laravel-bucket.s3.ap-notheast-1.amazonaws.com',
+        hostname: 'postgre-laravel-bucket.s3.ap-northeast-1.amazonaws.com',
         pathname: '/**',
       },
     ]
