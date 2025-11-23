@@ -14,7 +14,7 @@ use Tests\TestCase;
 uses(TestCase::class, RefreshDatabase::class);
 
 test('can create a product with categories and image', function () {
-    Storage::fake('public');
+    Storage::fake('s3');
 
     $user = User::factory()->create();
     $this->actingAs($user, 'sanctum');
@@ -44,7 +44,7 @@ test('can create a product with categories and image', function () {
     $product = Product::first();
     expect($product->categories)->toHaveCount(2);
 
-    Storage::disk('public')->assertExists('images/' . $product->image);
+    Storage::disk('s3')->assertExists($product->image);
 });
 
 test('fails to create a product with invalid data', function () {

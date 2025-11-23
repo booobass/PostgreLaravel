@@ -45,7 +45,8 @@ describe("Products コンポーネント", () => {
           stock: 5, 
           image: "img.png", 
           pivot: { order_id: 1, product_id: 1, quantity: 3, price: 120 },
-          categories: [] 
+          categories: [] ,
+          image_url: ""
         }
       ] as Product[],
       loading: false,
@@ -86,7 +87,8 @@ test("在庫が0の場合は売り切れ表示になる", () => {
         stock: 0,
         image: "http://img2.png",
         pivot: { order_id: 1, product_id: 2, quantity: 1, price: 500 },
-        categories: []
+        categories: [],
+        image_url: ""
       }
     ],
     loading: false,

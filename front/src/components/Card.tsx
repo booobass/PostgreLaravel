@@ -19,7 +19,7 @@ const Card = ({items} :{items: Product[]}) => {
                         {items.map((s: Product) => (
                             <div key={s.id}>
                                 <div className="justify-items-center">
-                                    <div className="relative max-w-[100px] w-full h-[90px]">
+                                    <div className="relative w-[100px] h-[90px]">
                                         <Image
                                             // src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/images/${s.image}`}
                                             src={s.image_url}
