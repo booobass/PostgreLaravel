@@ -14,7 +14,6 @@ const AdminUser = () => {
         const response = await api.get("/api/user", {
             headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
         })
-        console.log("AU", response.data)
         setUsers(response.data.users)
     }
 
@@ -27,7 +26,7 @@ const AdminUser = () => {
         role: ""
     })
 
-    console.log("IN", info)
+    // console.log("IN", info)
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>, userId: string) => {
         setInfo({
             user_id: userId,

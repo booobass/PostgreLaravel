@@ -40,7 +40,6 @@ const AdminUpdate = () => {
         const getSingleProduct = async (id: string) => {
             const response = await api.get(`/api/product/${id}`)
             const singleProduct = await response.data.product
-            console.log("sP", singleProduct)
             setProduct({
                 name: singleProduct.name,
                 price: singleProduct.price,
@@ -116,8 +115,8 @@ const AdminUpdate = () => {
 
     const {categories} = ReadCategory()
 
-    console.log("cc", categories)
-    console.log("Uc", updateCategories)
+    // console.log("cc", categories)
+    // console.log("Uc", updateCategories)
 
     const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = Number(e.target.value)

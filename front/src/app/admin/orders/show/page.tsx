@@ -30,7 +30,7 @@ const ShowOrder = () => {
 
     const [orderStatus, setOrderStatus] = useState("");
 
-    console.log("OS", orderStatus)
+    // console.log("OS", orderStatus)
 
     const statusChange = async (e: React.FormEvent, id: number) => {
         e.preventDefault()

@@ -18,7 +18,7 @@ const DeleteCategory = () => {
 
     const singleCategory = categories.find((e) => (String(e.id) === id))
 
-    console.log("SC", singleCategory);
+    // console.log("SC", singleCategory);
 
 
     const handleDelete = async (e: React.FormEvent) => {

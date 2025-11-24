@@ -81,7 +81,7 @@ export const CustomerProduct = () => {
     const fetchCustomerProduct = useCallback(async () => {
         try {
             const response = await api.get("/api/product/customer")
-            console.log("customer", response.data.products)
+            // console.log("customer", response.data.products)
             setCustomerProduct(response.data.products)
         } catch {
             alert("商品取得できません")
