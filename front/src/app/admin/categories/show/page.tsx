@@ -10,7 +10,7 @@ const ShowCategory = () => {
     const {categories} = ReadCategory()
 
 
-    console.log("SC", categories)
+    // console.log("SC", categories)
 
     return (
         <div className="warapper">

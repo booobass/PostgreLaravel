@@ -12,7 +12,6 @@ import './globals.css'
 const Page = () => {
 
   const {customerProduct} = CustomerProduct()
-  console.log("cp", customerProduct)
 
   // const specials = products.filter((p: Product) => (
   //   p.categories?.some((c: Category) => c.name === "特売"))

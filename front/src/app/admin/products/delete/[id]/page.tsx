@@ -18,7 +18,7 @@ const AdminDelete = () => {
 
     const singleProduct = products.find((e) => (String(e.id) === id))
 
-    console.log(singleProduct)
+    // console.log(singleProduct)
 
     const handleDelete = async (e: React.FormEvent) => {
         e.preventDefault()

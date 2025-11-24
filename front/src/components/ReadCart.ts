@@ -15,7 +15,7 @@ export const ReadCart = () => {
                 }
             )
             setCarts(response.data.carts)
-            console.log(response.data.carts)
+            // console.log(response.data.carts)
 
         } catch {
             alert("カート取得出来ません")

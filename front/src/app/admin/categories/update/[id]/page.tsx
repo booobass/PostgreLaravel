@@ -27,7 +27,7 @@ const UpdateCategory = () => {
         }
     }, [singleCategory])
 
-    console.log("UC", name)
+    // console.log("UC", name)
 
     const handleUpdate = async (e: React.FormEvent) => {
         e.preventDefault()

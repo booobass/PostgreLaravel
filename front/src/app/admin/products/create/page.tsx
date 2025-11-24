@@ -101,7 +101,7 @@ const CreateAdminProducts = () => {
     }
 
     const { categories } = ReadCategory()
-    console.log(categories)
+    // console.log(categories)
 
     return (
         <div className="warapper">
